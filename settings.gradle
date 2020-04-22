@@ -1,0 +1,5 @@
+rootProject.name='Mvvm-Toolkit-Architecture'
+include ':sample'
+include ':library:core'
+include ':library:core-databinding'
+include ':library:view-extentions'
