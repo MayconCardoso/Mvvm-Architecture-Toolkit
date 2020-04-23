@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+    }
+}
+
+dependencies {
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha01'
+    implementation 'junit:junit:4.12'
+    implementation 'androidx.test:runner:1.2.0'
+    implementation 'org.assertj:assertj-core:3.11.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.1'
+    implementation 'androidx.arch.core:core-testing:2.1.0'
+}
+
+ext {
+    bintrayRepo = 'MvvmToolkitArchitecture'
+    bintrayName = 'com.mctech.architecture.mvvm.core-testing'
+
+    publishedGroupId = 'com.mctech.architecture.mvvm'
+    libraryName = 'MvvmToolkitArchitecture'
+    artifact = 'core-testing'
+
+    libraryDescription = 'This is a keyboard change observable library. We all know how dificult is observe keyboard changes in our daily routine. So this library was built to help all of us'
+
+    siteUrl = 'https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture'
+    gitUrl = 'https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'mayconcardoso'
+    developerName = 'Maycon Cardoso'
+    developerEmail = 'maycon.santos.cardoso@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+ext.versions = [
+        'minSdk'        : 14,
+        'compileSdk'    : 29,
+        'targetSdk'     : 29,
+        'buildTools'    : '29.0.2',
+
+        'release'       : libraryVersion,
+        'code'          : 18,
+]
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        versionCode versions.code
+        versionName versions.release
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+apply from: 'https://raw.githubusercontent.com/LissF/JCenter/master/script.gradle'
