@@ -14,7 +14,7 @@ import java.util.*
 abstract class BaseViewModel : ViewModel() {
     /**
      * It is gonna keep the whole user flow on your view.
-     * So let's say something error happen, you could print the whole stack trace and send it to your backend error log.
+     * So let's say some error happen, you could print the whole stack trace and send it to your backend error log.
      * It will help you to trace your issues on your code and make the testing process easier.
      */
     private val userFlowInteraction = Stack<UserInteraction>()
@@ -49,6 +49,9 @@ abstract class BaseViewModel : ViewModel() {
      */
     protected open suspend fun handleUserInteraction(interaction: UserInteraction) = Unit
 
+    /**
+     * Used to send a command to your view.
+     */
     protected open suspend fun sendCommand(viewCommand: ViewCommand){
         _commandObservable.value = viewCommand
     }
