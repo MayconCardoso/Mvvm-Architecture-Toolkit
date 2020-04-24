@@ -17,8 +17,8 @@ buildscript {
 }
 
 dependencies {
-    implementation project(path: ':library:core')
-    implementation project(path: ':library:view-extentions')
+    implementation 'com.mctech.architecture.mvvm:core:1.0.1'
+    implementation 'com.mctech.architecture.mvvm:view-ktx:1.0.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -42,7 +42,7 @@ ext {
     siteUrl = 'https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit'
     gitUrl = 'https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'mayconcardoso'
     developerName = 'Maycon Cardoso'
