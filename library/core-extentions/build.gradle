@@ -17,22 +17,18 @@ buildscript {
 
 dependencies {
     implementation 'com.mctech.architecture.mvvm:x-core:1.2.0'
-    implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.2.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha01'
 }
 
 ext {
-    bintrayName = 'com.mctech.architecture.mvvm.x-core-databinding'
-    artifact = 'x-core-databinding'
-}
-
-android {
-    dataBinding {
-        enabled = true
-        enabledForTests = true
-    }
+    bintrayName = 'com.mctech.architecture.mvvm.x-core-ktx'
+    artifact = 'x-core-ktx'
 }
 
 apply from: 'https://raw.githubusercontent.com/LissF/JCenter/master/script.gradle'
