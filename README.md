@@ -5,16 +5,16 @@ It is extremely simple to use it and to test it. But again, it is only a persona
 
 ## Download (Not available yet)
 ```groovy
-// Core library. With the architecture components.
+// [REQUIRED] Core library. With the architecture components.
 implementation 'com.mctech.architecture.mvvm:core:1.0.0'
 
-// DataBinding library. If you wanna use the 'States' DataBinding adapters.
+// [OPTIONAL] DataBinding library. If you wanna use the 'States' DataBinding adapters.
 implementation 'com.mctech.architecture.mvvm:core-databinding:1.0.0'
 
-// Android Views extentios. 
+// [OPTIONAL] Android Views extentios. 
 implementation 'com.mctech.architecture.mvvm:view-ktx:1.0.0'
 
-// Testing library. To test your architecture easily
+// [OPTIONAL] Testing library. To test your architecture easily
 testImplementation 'com.mctech.architecture.mvvm:core-testing:1.0.0'
 ``` 
 
