@@ -20,6 +20,16 @@ implementation 'com.mctech.architecture.mvvm:core-databinding:1.0.1'
 
 // [OPTIONAL] Testing library. To test your architecture easily
 testImplementation 'com.mctech.architecture.mvvm:core-testing:1.0.1'
+
+// [BUG] There is a bug that I am working on. But for while use this code on your app gradle file.
+android {
+    ...
+
+    packagingOptions {
+        exclude("META-INF/*.kotlin_module")
+    }
+}
+
 ``` 
 
 ## Documentation
