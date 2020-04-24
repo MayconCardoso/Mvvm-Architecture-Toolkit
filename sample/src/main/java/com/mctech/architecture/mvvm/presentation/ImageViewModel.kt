@@ -2,14 +2,14 @@ package com.mctech.architecture.mvvm.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mctech.architecture.mvvm.core.BaseViewModel
-import com.mctech.architecture.mvvm.core.ComponentState
-import com.mctech.architecture.mvvm.core.UserInteraction
 import com.mctech.architecture.mvvm.domain.InteractionResult
 import com.mctech.architecture.mvvm.domain.entities.Image
 import com.mctech.architecture.mvvm.domain.entities.ImageDetails
 import com.mctech.architecture.mvvm.domain.interactions.LoadImageDetailsCase
 import com.mctech.architecture.mvvm.domain.interactions.LoadImageListCase
+import com.mctech.architecture.mvvm.x.core.BaseViewModel
+import com.mctech.architecture.mvvm.x.core.ComponentState
+import com.mctech.architecture.mvvm.x.core.UserInteraction
 
 class ImageViewModel(
     private val loadImageListCase       : LoadImageListCase,
