@@ -35,9 +35,9 @@ android {
 ## Documentation
 * [Core Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core)
 * [Core DataBinding Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-databinding)
-* [Core Extentions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-ktx)
+* [Core Extensions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-ktx)
 * [Core Testing Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-testing)
-* [View Extetions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/view-extentions)
+* [View Extesions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/view-extentions)
 
 ## Sample
 
