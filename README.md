@@ -3,7 +3,7 @@ This is only a personal implementation of MVVM architecture using the concept of
 
 It is extremely simple to use it and to test it. But again, it is only a personal implementation.
 
-## Download (Not available yet. Uploading to Jcenter)
+## Download
 ```groovy
 // [REQUIRED] Core library. With the architecture components.
 implementation 'com.mctech.architecture.mvvm:core:1.0.0'
