@@ -154,6 +154,24 @@ class ImageListFragment : Fragment() {
 }
 ```
 
+Every interaction that the user is sending to the ViewModel is handled here
+```kotlin
+class ImageViewModel() : BaseViewModel(){
+
+    ...
+
+    override suspend fun handleUserInteraction(interaction: UserInteraction) {
+        when(interaction){
+            is ImageInteraction.LoadImages  -> loadImagesInteraction()
+            is ImageInteraction.OpenDetails -> openImageDetailsInteraction(interaction.image)
+        }
+    }
+
+    ...
+
+}
+```
+
 Here are my 'ViewCommand' and 'UserInteraction' classes used on this example:
 
 ```kotlin
