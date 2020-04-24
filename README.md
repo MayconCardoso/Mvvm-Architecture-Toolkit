@@ -3,20 +3,23 @@ This is only a personal implementation of MVVM architecture using the concept of
 
 It is extremely simple to use it and to test it. But again, it is only a personal implementation.
 
-## Download (Not available yet. Uploading to Jcenter)
+## Download
 ```groovy
 // [REQUIRED] Core library. With the architecture components.
-implementation 'com.mctech.architecture.mvvm:core:1.0.0'
+implementation 'com.mctech.architecture.mvvm:core:1.0.1'
+
+// [OPTIONAL] Core Estension library. With the architecture components extentions.
+implementation 'com.mctech.architecture.mvvm:core-ktx:1.0.1'
 
 // [OPTIONAL] Android Views extentios. 
-implementation 'com.mctech.architecture.mvvm:view-ktx:1.0.0'
+implementation 'com.mctech.architecture.mvvm:view-ktx:1.0.1'
 
 // [OPTIONAL] DataBinding library. If you wanna use the 'States' DataBinding adapters.
 // [REQUIRES] 'com.mctech.architecture.mvvm:view-ktx:x.x.x' library
-implementation 'com.mctech.architecture.mvvm:core-databinding:1.0.0'
+implementation 'com.mctech.architecture.mvvm:core-databinding:1.0.1'
 
 // [OPTIONAL] Testing library. To test your architecture easily
-testImplementation 'com.mctech.architecture.mvvm:core-testing:1.0.0'
+testImplementation 'com.mctech.architecture.mvvm:core-testing:1.0.1'
 ``` 
 
 ## Documentation
