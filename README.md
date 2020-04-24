@@ -8,11 +8,12 @@ It is extremely simple to use it and to test it. But again, it is only a persona
 // [REQUIRED] Core library. With the architecture components.
 implementation 'com.mctech.architecture.mvvm:core:1.0.0'
 
-// [OPTIONAL] DataBinding library. If you wanna use the 'States' DataBinding adapters.
-implementation 'com.mctech.architecture.mvvm:core-databinding:1.0.0'
-
 // [OPTIONAL] Android Views extentios. 
 implementation 'com.mctech.architecture.mvvm:view-ktx:1.0.0'
+
+// [OPTIONAL] DataBinding library. If you wanna use the 'States' DataBinding adapters.
+// [REQUIRES] 'com.mctech.architecture.mvvm:view-ktx:x.x.x' library
+implementation 'com.mctech.architecture.mvvm:core-databinding:1.0.0'
 
 // [OPTIONAL] Testing library. To test your architecture easily
 testImplementation 'com.mctech.architecture.mvvm:core-testing:1.0.0'
