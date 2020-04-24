@@ -6,28 +6,38 @@ It is extremely simple to use it and to test it. But again, it is only a persona
 ## Download
 ```groovy
 // [REQUIRED] Core library. With the architecture components.
-implementation 'com.mctech.architecture.mvvm:core:1.0.1'
+implementation 'com.mctech.architecture.mvvm:x-core:1.1.1'
 
 // [OPTIONAL] Core Estension library. With the architecture components extentions.
-implementation 'com.mctech.architecture.mvvm:core-ktx:1.0.1'
+implementation 'com.mctech.architecture.mvvm:x-core-ktx:1.1.1'
 
 // [OPTIONAL] Android Views extentios. 
-implementation 'com.mctech.architecture.mvvm:view-ktx:1.0.1'
+implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.1.1'
 
 // [OPTIONAL] DataBinding library. If you wanna use the 'States' DataBinding adapters.
-// [REQUIRES] 'com.mctech.architecture.mvvm:view-ktx:x.x.x' library
-implementation 'com.mctech.architecture.mvvm:core-databinding:1.0.1'
+// [REQUIRES] 'com.mctech.architecture.mvvm:x-view-ktx:x.x.x' library
+implementation 'com.mctech.architecture.mvvm:x-core-databinding:1.1.1'
 
 // [OPTIONAL] Testing library. To test your architecture easily
-testImplementation 'com.mctech.architecture.mvvm:core-testing:1.0.1'
+testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.1.1'
+
+// [BUG] There is a bug that I am working on. But for while use this code on your app gradle file.
+android {
+    ...
+
+    packagingOptions {
+        exclude("META-INF/*.kotlin_module")
+    }
+}
+
 ``` 
 
 ## Documentation
 * [Core Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core)
 * [Core DataBinding Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-databinding)
-* [Core Extentions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-ktx)
+* [Core Extensions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-ktx)
 * [Core Testing Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-testing)
-* [View Extetions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/view-extentions)
+* [View Extensions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/view-extentions)
 
 ## Sample
 
