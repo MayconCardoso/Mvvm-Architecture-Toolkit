@@ -19,12 +19,12 @@ testImplementation 'com.mctech.architecture.mvvm:core-testing:1.0.0'
 ``` 
 
 ## Documentation
-* [Core Library](https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture/tree/master/library/core)
-* [Core DataBinding Library](https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture/tree/master/library/core-databinding)
-* [Core Extentions Library](https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture/tree/master/library/core-ktx)
-* [Core Testing Library](https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture/tree/master/library/core-testing)
-* [View Extetions Library](https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture/tree/master/library/view-extentions)
+* [Core Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core)
+* [Core DataBinding Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-databinding)
+* [Core Extentions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-ktx)
+* [Core Testing Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-testing)
+* [View Extetions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/view-extentions)
 
 ## Sample
 
-Here is a simple [sample](https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture/tree/master/sample) to show a little bit what we can do if this library. 
+Here is a simple [sample](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/sample) to show a little bit what we can do if this library. 
