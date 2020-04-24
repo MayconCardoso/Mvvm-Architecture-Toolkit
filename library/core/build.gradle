@@ -27,17 +27,17 @@ dependencies {
 }
 
 ext {
-    bintrayRepo = 'MvvmToolkitArchitecture'
+    bintrayRepo = 'MvvmArchitectureToolkit'
     bintrayName = 'com.mctech.architecture.mvvm.core'
 
     publishedGroupId = 'com.mctech.architecture.mvvm'
-    libraryName = 'MvvmToolkitArchitecture'
+    libraryName = 'MvvmArchitectureToolkit'
     artifact = 'core'
 
-    libraryDescription = 'This is a keyboard change observable library. We all know how dificult is observe keyboard changes in our daily routine. So this library was built to help all of us'
+    libraryDescription = 'This is only a personal implementation of MVVM architecture using the concept of "State Machine" to keep your screen components independently. It also has a concept of "interaction" defining exactly what the user can do on your screen turning the testing process extremely easier, because now, you are able to test the "state" of your system.'
 
-    siteUrl = 'https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture'
-    gitUrl = 'https://github.com/MayconCardoso/Mvvm-Toolkit-Architecture.git'
+    siteUrl = 'https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit'
+    gitUrl = 'https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit'
 
     libraryVersion = '1.0.0'
 
