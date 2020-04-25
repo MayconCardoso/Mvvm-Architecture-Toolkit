@@ -18,6 +18,9 @@ implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.2.1'
 // [REQUIRES] 'com.mctech.architecture.mvvm:x-view-ktx:x.x.x' library
 implementation 'com.mctech.architecture.mvvm:x-core-databinding:1.2.1'
 
+// [OPTIONAL] Networking library. To help you create your APIs easily
+implementation 'com.mctech.architecture.mvvm:x-core-networking:1.2.1'
+
 // [OPTIONAL] Testing library. To test your architecture easily
 testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.2.1'
 
@@ -25,8 +28,8 @@ testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.2.1'
 
 ## Documentation
 * [Core Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core)
-* [Core DataBinding Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-databinding)
 * [Core Extensions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-extentions)
+* [Core DataBinding Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-databinding)
 * [Core Testing Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-testing)
 * [Core Networking Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-networking)
 * [View Extensions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/view-extentions)
