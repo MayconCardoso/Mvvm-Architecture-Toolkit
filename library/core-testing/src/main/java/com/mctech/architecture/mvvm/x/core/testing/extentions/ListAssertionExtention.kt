@@ -9,3 +9,5 @@ fun <T> List<T>.assertLast()                        = assertAtPosition(size - 1)
 
 fun <T> List<T>.assertCount(count : Int)            = Assertions.assertThat(size).isEqualTo(count)
 fun <T> List<T>.assertAtPosition(position : Int)    = Assertions.assertThat(get(position))
+
+fun Any.assertThat() = Assertions.assertThat(this)

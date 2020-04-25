@@ -16,7 +16,7 @@ buildscript {
 }
 
 dependencies {
-    implementation 'com.mctech.architecture.mvvm:x-core:1.2.0'
+    implementation 'com.mctech.architecture.mvvm:x-core:1.2.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'

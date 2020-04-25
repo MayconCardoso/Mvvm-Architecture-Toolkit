@@ -9,15 +9,15 @@ import com.mctech.architecture.mvvm.domain.interactions.LoadImageDetailsCase
 import com.mctech.architecture.mvvm.domain.interactions.LoadImageListCase
 import com.mctech.architecture.mvvm.x.core.ComponentState
 import com.mctech.architecture.mvvm.x.core.testing.BaseViewModelTest
-import com.mctech.architecture.mvvm.x.core.testing.extentions.*
+import com.mctech.architecture.mvvm.x.core.testing.extentions.assertFlow
+import com.mctech.architecture.mvvm.x.core.testing.extentions.assertIsEmpty
+import com.mctech.architecture.mvvm.x.core.testing.extentions.testLiveData
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
-import org.assertj.core.api.Assertions
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-
 
 @ExperimentalCoroutinesApi
 internal class ImageViewModelTest : BaseViewModelTest(){
@@ -44,8 +44,7 @@ internal class ImageViewModelTest : BaseViewModelTest(){
     fun `should initialize list component`() {
         viewModel.imageListComponent.testLiveData(
             assertion = {
-                it.assertCount(1)
-                it.assertFirst().isEqualTo(ComponentState.Initializing)
+                it.assertFlow(ComponentState.Initializing)
                 verifyZeroInteractions(loadImageListCase)
                 verifyZeroInteractions(loadImageDetailsCase)
             }
@@ -69,15 +68,11 @@ internal class ImageViewModelTest : BaseViewModelTest(){
                 viewModel.interact(ImageInteraction.LoadImages)
             },
             assertion = {
-                val successValue = it[2] as ComponentState.Success<*>
-
-                it.assertCount(3)
-                it.assertAtPosition(0).isEqualTo(ComponentState.Initializing)
-                it.assertAtPosition(1).isEqualTo(ComponentState.Loading.FromEmpty)
-                it.assertAtPosition(2).isExactlyInstanceOf(ComponentState.Success::class.java)
-
-                Assertions.assertThat(successValue.result).isEqualTo(expectedList)
-
+                it.assertFlow(
+                    ComponentState.Initializing,
+                    ComponentState.Loading.FromEmpty,
+                    ComponentState.Success(expectedList)
+                )
                 verify(loadImageListCase, times(1)).execute()
             }
         )
@@ -95,15 +90,11 @@ internal class ImageViewModelTest : BaseViewModelTest(){
                 viewModel.interact(ImageInteraction.LoadImages)
             },
             assertion = {
-                val errorValue = it[2] as ComponentState.Error
-
-                it.assertCount(3)
-                it.assertAtPosition(0).isEqualTo(ComponentState.Initializing)
-                it.assertAtPosition(1).isEqualTo(ComponentState.Loading.FromEmpty)
-                it.assertAtPosition(2).isExactlyInstanceOf(ComponentState.Error::class.java)
-
-                Assertions.assertThat(errorValue.reason).isEqualTo(ImageException.CannotFetchImages)
-
+                it.assertFlow(
+                    ComponentState.Initializing,
+                    ComponentState.Loading.FromEmpty,
+                    ComponentState.Error(ImageException.CannotFetchImages)
+                )
                 verify(loadImageListCase, times(1)).execute()
             }
         )

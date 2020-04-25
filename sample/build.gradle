@@ -50,12 +50,12 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
 
     // [REQUIRED] Core library. With the architecture components.
-    implementation 'com.mctech.architecture.mvvm:x-core:1.2.0'
-    implementation 'com.mctech.architecture.mvvm:x-core-ktx:1.2.0'
-    implementation 'com.mctech.architecture.mvvm:x-core-databinding:1.2.0'
-    implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.2.0'
+    implementation 'com.mctech.architecture.mvvm:x-core:1.2.1'
+    implementation 'com.mctech.architecture.mvvm:x-core-ktx:1.2.1'
+    implementation 'com.mctech.architecture.mvvm:x-core-databinding:1.2.1'
+    implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.2.1'
 
-    testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.2.0'
+    testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.2.1'
 
 
     testImplementation 'junit:junit:4.12'
