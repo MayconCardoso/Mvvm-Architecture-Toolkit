@@ -72,6 +72,44 @@ fun View.showOnSuccessOrWithData(state: ComponentState<*>?) {
     }
 }
 
+
+@BindingAdapter("showOnSuccessWithEmptyData", requireAll = false)
+fun View.showOnSuccessWithEmptyData(state: ComponentState<List<*>>?) {
+    state?.also {
+        val shouldShow = when(state){
+            is ComponentState.Success -> {
+                state.result.isEmpty()
+            }
+            else -> false
+        }
+
+        showViewByState(
+            view = this,
+            isToShow = shouldShow,
+            animate = false
+        )
+    }
+}
+
+@BindingAdapter("showOnSuccessWithNotEmptyData", requireAll = false)
+fun View.showOnSuccessWithNotEmptyData(state: ComponentState<List<*>>?) {
+    state?.also {
+        val shouldShow = when(state){
+            is ComponentState.Loading.FromData -> true
+            is ComponentState.Success -> {
+                state.result.isNotEmpty()
+            }
+            else -> false
+        }
+
+        showViewByState(
+            view = this,
+            isToShow = shouldShow,
+            animate = false
+        )
+    }
+}
+
 @BindingAdapter("showOnError", requireAll = false)
 fun View.showOnError(state: ComponentState<*>?) {
     state?.also {
@@ -112,7 +150,6 @@ fun View.showByConditionOrInvisible(state: Boolean) {
         hideState = INVISIBLE
     )
 }
-
 
 @BindingAdapter("animatedShowOnLoading", requireAll = false)
 fun View.animatedShowOnLoading(state: ComponentState<*>?) {
@@ -175,6 +212,43 @@ fun View.animatedShowOnSuccessOrWithData(state: ComponentState<*>?) {
         showViewByState(
             view = this,
             isToShow = state is ComponentState.Success || state is ComponentState.Loading.FromData,
+            animate = true
+        )
+    }
+}
+
+@BindingAdapter("animatedShowOnSuccessWithEmptyData", requireAll = false)
+fun View.animatedShowOnSuccessWithEmptyData(state: ComponentState<List<*>>?) {
+    state?.also {
+        val shouldShow = when(state){
+            is ComponentState.Success -> {
+                state.result.isEmpty()
+            }
+            else -> false
+        }
+
+        showViewByState(
+            view = this,
+            isToShow = shouldShow,
+            animate = true
+        )
+    }
+}
+
+@BindingAdapter("animatedShowOnSuccessWithNotEmptyData", requireAll = false)
+fun View.animatedShowOnSuccessWithNotEmptyData(state: ComponentState<List<*>>?) {
+    state?.also {
+        val shouldShow = when(state){
+            is ComponentState.Loading.FromData -> true
+            is ComponentState.Success -> {
+                state.result.isNotEmpty()
+            }
+            else -> false
+        }
+
+        showViewByState(
+            view = this,
+            isToShow = shouldShow,
             animate = true
         )
     }

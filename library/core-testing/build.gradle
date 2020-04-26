@@ -15,7 +15,7 @@ buildscript {
 }
 
 dependencies {
-    implementation 'com.mctech.architecture.mvvm:x-core:1.2.1'
+    implementation "com.mctech.architecture.mvvm:x-core:$dependentVerionLibrary"
 
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha01'
     implementation 'junit:junit:4.12'

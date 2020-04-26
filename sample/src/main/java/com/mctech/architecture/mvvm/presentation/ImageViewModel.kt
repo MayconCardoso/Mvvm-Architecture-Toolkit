@@ -10,6 +10,10 @@ import com.mctech.architecture.mvvm.domain.interactions.LoadImageListCase
 import com.mctech.architecture.mvvm.x.core.BaseViewModel
 import com.mctech.architecture.mvvm.x.core.ComponentState
 import com.mctech.architecture.mvvm.x.core.UserInteraction
+import com.mctech.architecture.mvvm.x.core.ktx.changeToErrorState
+import com.mctech.architecture.mvvm.x.core.ktx.changeToListLoadingState
+import com.mctech.architecture.mvvm.x.core.ktx.changeToLoadingState
+import com.mctech.architecture.mvvm.x.core.ktx.changeToSuccessState
 
 class ImageViewModel(
     private val loadImageListCase       : LoadImageListCase,
@@ -31,25 +35,25 @@ class ImageViewModel(
 
     private suspend fun loadImagesInteraction() {
         // Set the list component with 'loading' state.
-        _imageListComponent.value = ComponentState.Loading.FromEmpty
+        _imageListComponent.changeToListLoadingState()
 
         // Load image's details.
         when(val listResult = loadImageListCase.execute()){
             // Set the list component with 'Success' state.
             is InteractionResult.Success -> {
-                _imageListComponent.value = ComponentState.Success(listResult.result)
+                _imageListComponent.changeToSuccessState(listResult.result)
             }
 
             // Set the list component with 'Error' state.
             is InteractionResult.Error -> {
-                _imageListComponent.value = ComponentState.Error(listResult.error)
+                _imageListComponent.changeToErrorState(listResult.error)
             }
         }
     }
 
     private suspend fun openImageDetailsInteraction(image: Image) {
         // Set the details component with 'loading' state.
-        _imageDetailsComponent.value = ComponentState.Loading.FromEmpty
+        _imageDetailsComponent.changeToLoadingState()
 
         // Open the details screen.
         sendCommand(ImageCommands.OpenImageDetails)
@@ -58,12 +62,12 @@ class ImageViewModel(
         when(val detailsResult = loadImageDetailsCase.execute(image)){
             // Set the details component with 'Success' state.
             is InteractionResult.Success -> {
-                _imageDetailsComponent.value = ComponentState.Success(detailsResult.result)
+                _imageDetailsComponent.changeToSuccessState(detailsResult.result)
             }
 
             // Set the details component with 'Error' state.
             is InteractionResult.Error -> {
-                _imageDetailsComponent.value = ComponentState.Error(detailsResult.error)
+                _imageDetailsComponent.changeToErrorState(detailsResult.error)
             }
         }
     }
