@@ -41,18 +41,18 @@ class ImageViewModel() : BaseViewModel(){
     
     private suspend fun loadImagesInteraction() {
         // Set the list component with 'loading' state.
-        _imageListComponent.value = ComponentState.Loading.FromEmpty
+        _imageListComponent.changeToListLoadingState()
 
         // Load image's details.
         when(val listResult = loadImageListCase.execute()){
             // Set the list component with 'Success' state.
             is InteractionResult.Success -> {
-                _imageListComponent.value = ComponentState.Success(listResult.result)
+                _imageListComponent.changeToSuccessState(listResult.result)
             }
 
             // Set the list component with 'Error' state.
             is InteractionResult.Error -> {
-                _imageListComponent.value = ComponentState.Error(listResult.error)
+                _imageListComponent.changeToErrorState(listResult.error)
             }
         }
     }
@@ -68,9 +68,9 @@ class ImageViewModel() : BaseViewModel(){
     
     ...
     
-    private suspend fun openImageDetailsInteraction(image: Image) {
+        private suspend fun openImageDetailsInteraction(image: Image) {
         // Set the details component with 'loading' state.
-        _imageDetailsComponent.value = ComponentState.Loading.FromEmpty
+        _imageDetailsComponent.changeToLoadingState()
 
         // Open the details screen.
         sendCommand(ImageCommands.OpenImageDetails)
@@ -79,12 +79,12 @@ class ImageViewModel() : BaseViewModel(){
         when(val detailsResult = loadImageDetailsCase.execute(image)){
             // Set the details component with 'Success' state.
             is InteractionResult.Success -> {
-                _imageDetailsComponent.value = ComponentState.Success(detailsResult.result)
+                _imageDetailsComponent.changeToSuccessState(detailsResult.result)
             }
 
             // Set the details component with 'Error' state.
             is InteractionResult.Error -> {
-                _imageDetailsComponent.value = ComponentState.Error(detailsResult.error)
+                _imageDetailsComponent.changeToErrorState(detailsResult.error)
             }
         }
     }
