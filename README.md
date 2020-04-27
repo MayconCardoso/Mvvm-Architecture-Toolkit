@@ -6,23 +6,23 @@ It is extremely simple to use it and to test it. But again, it is only a persona
 ## Download
 ```groovy
 // [REQUIRED] Core library. With the architecture components.
-implementation 'com.mctech.architecture.mvvm:x-core:1.4.1'
+implementation 'com.mctech.architecture.mvvm:x-core:1.4.2'
 
 // [OPTIONAL] Core Estension library. With the architecture components extentions.
-implementation 'com.mctech.architecture.mvvm:x-core-ktx:1.4.1'
+implementation 'com.mctech.architecture.mvvm:x-core-ktx:1.4.2'
 
 // [OPTIONAL] Android Views extentios. 
-implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.4.1'
+implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.4.2'
 
 // [OPTIONAL] DataBinding library. If you wanna use the 'States' DataBinding adapters.
 // [REQUIRES] 'com.mctech.architecture.mvvm:x-view-ktx:x.x.x' library
-implementation 'com.mctech.architecture.mvvm:x-core-databinding:1.4.1'
+implementation 'com.mctech.architecture.mvvm:x-core-databinding:1.4.2'
 
 // [OPTIONAL] Networking library. To help you create your APIs easily
-implementation 'com.mctech.architecture.mvvm:x-core-networking:1.4.1'
+implementation 'com.mctech.architecture.mvvm:x-core-networking:1.4.2'
 
 // [OPTIONAL] Testing library. To test your architecture easily
-testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.4.1'
+testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.4.2'
 
 ``` 
 

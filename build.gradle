@@ -2,8 +2,8 @@ buildscript {
     ext.kotlin_version = '1.3.61'
 
     // LIBRARY
-    ext.libraryVersion  = '1.4.1'
-    ext.previousVersion = '1.4.1'
+    ext.libraryVersion  = '1.4.2'
+    ext.previousVersion = '1.4.2'
     ext.dependentVerionLibrary = ext.libraryVersion
 
     ext.bintrayRepo = 'MvvmArchitectureToolkit'

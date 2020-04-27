@@ -7,30 +7,26 @@ A lot of [extensions](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit
 This is the most difficult to understand. So I will put same example here. Here we have two important methods to create and update a recycler view without creating adapters and view holders.
 
 ```kotlin
-private fun createImageList(recyclerView: RecyclerView, images: List<Image>) =
-    recyclerView.createBindingRecyclerView(
+private fun setUpList(images: List<Image>) {
+    binding?.recyclerList?.attachSimpleData(
         items = images,
         viewBindingCreator = { parent, inflater ->
             ItemImageBinding.inflate(inflater, parent, false)
         },
-        prepareHolder = { item, viewBinding, viewHolder ->
+        prepareHolder = { item, viewBinding, _ ->
             viewBinding.item = item
             viewBinding.root.setOnClickListener {
                 viewModel.interact(ImageInteraction.OpenDetails(item))
             }
-        }
-    )
-    
- private fun updateImageList(recyclerView: RecyclerView, images: List<Image>) {
-    recyclerView.refreshBindingItems(
-        newItems = images,
-        callback = object : DiffUtil.ItemCallback<Image>() {
+        },
+        updateCallback = object : DiffUtil.ItemCallback<Image>() {
             override fun areItemsTheSame(left: Image, right: Image) = left.id == right.id
 
             override fun areContentsTheSame(left: Image, right: Image): Boolean {
                 return left.title == right.title && left.date == right.date
             }
-        })
+        }
+    )
 }
 
 ```

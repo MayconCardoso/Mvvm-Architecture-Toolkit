@@ -18,8 +18,7 @@ import com.mctech.architecture.mvvm.x.core.ComponentState
 import com.mctech.architecture.mvvm.x.core.ViewCommand
 import com.mctech.architecture.mvvm.x.core.ktx.bindCommand
 import com.mctech.architecture.mvvm.x.core.ktx.bindState
-import com.mctech.library.view.ktx.createBindingRecyclerView
-import com.mctech.library.view.ktx.refreshBindingItems
+import com.mctech.library.view.ktx.attachSimpleData
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ImageListFragment : Fragment() {
@@ -90,33 +89,7 @@ class ImageListFragment : Fragment() {
     }
 
     private fun setUpList(images: List<Image>) {
-        binding?.recyclerList?.also { recyclerView ->
-            // Create first list.
-            if (recyclerView.adapter == null) {
-                createImageList(recyclerView, images)
-            }
-
-            // Update current list.
-            else {
-                updateImageList(recyclerView, images)
-            }
-        }
-    }
-
-    private fun updateImageList(recyclerView: RecyclerView, images: List<Image>) {
-        recyclerView.refreshBindingItems(
-            newItems = images,
-            callback = object : DiffUtil.ItemCallback<Image>() {
-                override fun areItemsTheSame(left: Image, right: Image) = left.id == right.id
-
-                override fun areContentsTheSame(left: Image, right: Image): Boolean {
-                    return left.title == right.title && left.date == right.date
-                }
-            })
-    }
-
-    private fun createImageList(recyclerView: RecyclerView, images: List<Image>) =
-        recyclerView.createBindingRecyclerView(
+        binding?.recyclerList?.attachSimpleData(
             items = images,
             viewBindingCreator = { parent, inflater ->
                 ItemImageBinding.inflate(inflater, parent, false)
@@ -126,6 +99,14 @@ class ImageListFragment : Fragment() {
                 viewBinding.root.setOnClickListener {
                     viewModel.interact(ImageInteraction.OpenDetails(item))
                 }
+            },
+            updateCallback = object : DiffUtil.ItemCallback<Image>() {
+                override fun areItemsTheSame(left: Image, right: Image) = left.id == right.id
+
+                override fun areContentsTheSame(left: Image, right: Image): Boolean {
+                    return left.title == right.title && left.date == right.date
+                }
             }
         )
+    }
 }

@@ -119,11 +119,59 @@ fun <T> RecyclerView.refreshBindingItems(
                 newItems[new]
             )
         })
+        result.dispatchUpdatesTo(it)
 
         oldItems.clear()
         oldItems.addAll(newItems)
+    }
+}
 
-        result.dispatchUpdatesTo(it)
+
+fun <T, VDB : ViewDataBinding> RecyclerView.attachSimpleData(
+    items: List<T> = listOf(),
+    layoutOrientation: Int = RecyclerView.VERTICAL,
+    viewBindingCreator: (parent: ViewGroup, inflater: LayoutInflater) -> VDB,
+    prepareHolder: (item: T, viewBinding: VDB, viewHolder: BaseRecyclerAdapterBindingHolder<T, VDB>) -> Unit,
+    onRecyclerDone: (adapter: BaseRecyclerAdapterBinding<T, VDB, BaseRecyclerAdapterBindingHolder<T, VDB>>) -> Unit = {},
+    updateCallback: DiffUtil.ItemCallback<T>?
+) {
+    if(adapter == null){
+        createBindingRecyclerView(
+            items = items,
+            layoutOrientation = layoutOrientation,
+            viewBindingCreator = viewBindingCreator,
+            prepareHolder = prepareHolder,
+            onRecyclerDone = onRecyclerDone
+        )
+    }
+    else{
+        updateCallback?.let {
+            refreshBindingItems(items, it)
+        }
+    }
+}
+
+fun <T, VDB : ViewDataBinding> RecyclerView.attachGridSimpleData(
+    items: List<T> = listOf(),
+    countItemsPerLine: Int = 3,
+    viewBindingCreator: (parent: ViewGroup, inflater: LayoutInflater) -> VDB,
+    prepareHolder: (item: T, viewBinding: VDB, viewHolder: BaseRecyclerAdapterBindingHolder<T, VDB>) -> Unit,
+    onRecyclerDone: (adapter: BaseRecyclerAdapterBinding<T, VDB, BaseRecyclerAdapterBindingHolder<T, VDB>>) -> Unit = {},
+    updateCallback: DiffUtil.ItemCallback<T>?
+) {
+    if(adapter == null){
+        createBindingRecyclerViewGridManager(
+            items = items,
+            countItemsPerLine = countItemsPerLine,
+            viewBindingCreator = viewBindingCreator,
+            prepareHolder = prepareHolder,
+            onRecyclerDone = onRecyclerDone
+        )
+    }
+    else{
+        updateCallback?.let {
+            refreshBindingItems(items, it)
+        }
     }
 }
 
