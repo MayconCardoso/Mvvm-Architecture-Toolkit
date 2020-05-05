@@ -68,7 +68,7 @@ class ImageViewModel() : BaseViewModel(){
     
     ...
     
-        private suspend fun openImageDetailsInteraction(image: Image) {
+    private suspend fun openImageDetailsInteraction(image: Image) {
         // Set the details component with 'loading' state.
         _imageDetailsComponent.changeToLoadingState()
 
