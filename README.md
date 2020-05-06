@@ -1,7 +1,7 @@
 # MVVM Architecture Toolkit
-This is only a personal implementation of MVVM architecture using the concept of "State Machine" to keep your screen components independently. It also has a concept of "interaction" defining exactly what the user can do on your screen turning the testing process extremely easier. Because now you are able to test the "state" of your system.
+This is only a personal implementation of MVVM architecture that makes your life easier by helping you to keep your screen components independently. It also has a concept of "interaction" defining exactly what the user can do on your screen turning the testing process extremely easier, once now you are able to test the "state" of your app.
 
-It is extremely simple to use it and to test it. But again, it is only a personal implementation.
+It is extremely simple to use it and to test it. But again, it is only a personal implementation. However, if this library help you anyway, please give me a star :)
 
 ## Download
 ```groovy
@@ -40,4 +40,4 @@ testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.4.2'
 
 ## Sample
 
-Here is a simple [sample](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/sample) to show a little bit what we can do if this library. 
+Here is a [Real Android App](https://github.com/MayconCardoso/StockTradeTracking) implementing this library to define its architecture.
