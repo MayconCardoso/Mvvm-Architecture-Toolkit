@@ -2,20 +2,20 @@
 
 In this module we are going to see the core MVVM architecture. There are only [a few classes](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core/src/main/java/com/mctech/architecture/mvvm/core) here, but they are very important
 
-### [ComponentState](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/blob/master/library/core/src/main/java/com/mctech/architecture/mvvm/core/ComponentState.kt)
+### [ComponentState](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/blob/master/library/core/src/main/java/com/mctech/architecture/mvvm/x/core/ComponentState.kt)
 
 This is the coolest one to me. We know how difficult is to handle many different components on our screen, don't we? Thinking about that, I have been using this simple sealed class that defines all states my component can be. 
 So now, I do not need to care about the lifecycle of my component ever since I use this class attached to your view lifecycle. 
 
-### [UserInteraction](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/blob/master/library/core/src/main/java/com/mctech/architecture/mvvm/core/UserInteraction.kt)
+### [UserInteraction](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/blob/master/library/core/src/main/java/com/mctech/architecture/mvvm/x/core/UserInteraction.kt)
 
 This represents every single event the user performs on your screen/component. Those events will be stored in a Stack on your BaseViewModel to help you track the user flow and make it possible to test your code.
 
-### [ViewCommand](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/blob/master/library/core/src/main/java/com/mctech/architecture/mvvm/core/ViewCommand.kt)
+### [ViewCommand](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/blob/master/library/core/src/main/java/com/mctech/architecture/mvvm/x/core/ViewCommand.kt)
 
 It is basically the same as UserInteraction but it is called inside your ViewModel to send same event that will be consumed only once by your view. 
 
-### [BaseViewModel](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/blob/master/library/core/src/main/java/com/mctech/architecture/mvvm/core/BaseViewModel.kt)
+### [BaseViewModel](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/blob/master/library/core/src/main/java/com/mctech/architecture/mvvm/x/core/BaseViewModel.kt)
 
 Last but not least important, the BaseViewModel. I do not like base classes overall, to be honest. But I use this BaseViewModel class a lot. Because it has only a few methods that help us to follow the architecture patters. Please take a look at this class to understand it better.
 
@@ -68,7 +68,7 @@ class ImageViewModel() : BaseViewModel(){
     
     ...
     
-        private suspend fun openImageDetailsInteraction(image: Image) {
+    private suspend fun openImageDetailsInteraction(image: Image) {
         // Set the details component with 'loading' state.
         _imageDetailsComponent.changeToLoadingState()
 
