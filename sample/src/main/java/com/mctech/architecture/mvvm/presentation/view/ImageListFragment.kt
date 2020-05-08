@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.mctech.architecture.mvvm.R
 import com.mctech.architecture.mvvm.databinding.FragmentListOfImagesBinding
 import com.mctech.architecture.mvvm.databinding.ItemImageBinding
@@ -18,7 +17,7 @@ import com.mctech.architecture.mvvm.x.core.ComponentState
 import com.mctech.architecture.mvvm.x.core.ViewCommand
 import com.mctech.architecture.mvvm.x.core.ktx.bindCommand
 import com.mctech.architecture.mvvm.x.core.ktx.bindState
-import com.mctech.library.view.ktx.attachSimpleData
+import com.mctech.library.view.ktx.attachSimpleDataBindingData
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ImageListFragment : Fragment() {
@@ -83,13 +82,13 @@ class ImageListFragment : Fragment() {
             is ComponentState.Success -> {
                 // I am using the DataBinding feature, so I do not need to 'show' the list visibility
                 // I just need to setup my recycler view here.
-                setUpList(listState.result)
+                setUpVerticalList(listState.result)
             }
         }
     }
 
-    private fun setUpList(images: List<Image>) {
-        binding?.recyclerList?.attachSimpleData(
+    private fun setUpVerticalList(images: List<Image>) {
+        binding?.recyclerList?.attachSimpleDataBindingData(
             items = images,
             viewBindingCreator = { parent, inflater ->
                 ItemImageBinding.inflate(inflater, parent, false)

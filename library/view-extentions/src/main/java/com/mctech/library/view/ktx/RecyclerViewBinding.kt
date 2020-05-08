@@ -103,7 +103,7 @@ fun <T> RecyclerView.refreshBindingItems(
     callback: DiffUtil.ItemCallback<T>
 ) {
     this.adapter?.let {
-        val oldItems = (it as BaseRecyclerAdapterBinding<T, *, *>).items
+        val oldItems = (it as BaseRecyclerAdapterBinding<T, *, *>).allItems
         val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
 
             override fun getOldListSize() = oldItems.size
@@ -120,15 +120,14 @@ fun <T> RecyclerView.refreshBindingItems(
             )
         })
         result.dispatchUpdatesTo(it)
-
-        oldItems.clear()
-        oldItems.addAll(newItems)
+        it.updateItems(newItems)
     }
 }
 
 
-fun <T, VDB : ViewDataBinding> RecyclerView.attachSimpleData(
+fun <T, VDB : ViewDataBinding> RecyclerView.attachSimpleDataBindingData(
     items: List<T> = listOf(),
+    cachedAdapter: BaseRecyclerAdapterBinding<T, *, *>? = null,
     layoutOrientation: Int = RecyclerView.VERTICAL,
     viewBindingCreator: (parent: ViewGroup, inflater: LayoutInflater) -> VDB,
     prepareHolder: (item: T, viewBinding: VDB, viewHolder: BaseRecyclerAdapterBindingHolder<T, VDB>) -> Unit,
@@ -138,6 +137,7 @@ fun <T, VDB : ViewDataBinding> RecyclerView.attachSimpleData(
     if(adapter == null){
         createBindingRecyclerView(
             items = items,
+            cachedAdapter = cachedAdapter,
             layoutOrientation = layoutOrientation,
             viewBindingCreator = viewBindingCreator,
             prepareHolder = prepareHolder,
@@ -151,7 +151,7 @@ fun <T, VDB : ViewDataBinding> RecyclerView.attachSimpleData(
     }
 }
 
-fun <T, VDB : ViewDataBinding> RecyclerView.attachGridSimpleData(
+fun <T, VDB : ViewDataBinding> RecyclerView.attachSimpleDataBindingGridData(
     items: List<T> = listOf(),
     countItemsPerLine: Int = 3,
     viewBindingCreator: (parent: ViewGroup, inflater: LayoutInflater) -> VDB,
@@ -207,6 +207,14 @@ abstract class BaseRecyclerAdapterBinding<T, VDB : ViewDataBinding, VH : BaseRec
         }
 
         notifyDataSetChanged()
+    }
+
+    fun updateItems(items: List<T>){
+        this.allItems.clear()
+        this.allItems.addAll(items)
+
+        this.items.clear()
+        this.items.addAll(items)
     }
 }
 
