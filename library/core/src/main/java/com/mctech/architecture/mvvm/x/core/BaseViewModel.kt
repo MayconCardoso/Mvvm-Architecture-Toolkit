@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.reflect.KClass
+import kotlin.reflect.full.callSuspend
+import kotlin.reflect.jvm.isAccessible
 
 /**
  * I do not like 'Base' classes. But in this case, it helps a lot.
@@ -20,11 +23,19 @@ abstract class BaseViewModel : ViewModel() {
     private val userFlowInteraction = Stack<UserInteraction>()
 
     /**
+     * It keeps the consumers for each user interaction on the flow.
+     */
+    protected var mappedUserInteractions = hashMapOf<KClass<out UserInteraction>, suspend (UserInteraction) -> Unit>()
+
+    /**
      * This is only a simple observable that your view will be observing to handle some command.
      */
-    private val _commandObservable =
-        SingleLiveEvent<ViewCommand>()
+    private val _commandObservable = SingleLiveEvent<ViewCommand>()
     val commandObservable : LiveData<ViewCommand> get() = _commandObservable
+
+    init {
+        mapInteractionObservers()
+    }
 
     /**
      * Called by view to send 'an interaction' to the view model by using the view model scope.
@@ -41,7 +52,7 @@ abstract class BaseViewModel : ViewModel() {
      */
     suspend fun suspendedInteraction(userInteraction: UserInteraction) {
         userFlowInteraction.push(userInteraction)
-        handleUserInteraction(userInteraction)
+        internalInteractionHandler(userInteraction)
     }
 
     /**
@@ -49,6 +60,21 @@ abstract class BaseViewModel : ViewModel() {
      * So you can basically override it and handle the specific interaction by using a 'when' flow for example.
      */
     protected open suspend fun handleUserInteraction(interaction: UserInteraction) = Unit
+
+    /**
+     * It is the function that is called every single interaction the screen send.
+     * So you can basically override it and handle the specific interaction by using a 'when' flow for example.
+     */
+    private suspend fun internalInteractionHandler(interaction: UserInteraction) {
+        // It is a mapped function
+        if(mappedUserInteractions.containsKey(interaction::class)){
+            mappedUserInteractions[interaction::class]?.invoke(interaction)
+            return
+        }
+
+        // Handle by using legacy way
+        handleUserInteraction(interaction)
+    }
 
     /**
      * Used to send a command to your view.
@@ -72,7 +98,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     suspend fun suspendedReprocessLastInteraction() {
-        handleUserInteraction(userFlowInteraction.last())
+        internalInteractionHandler(userFlowInteraction.last())
     }
 
     /**
@@ -91,6 +117,29 @@ abstract class BaseViewModel : ViewModel() {
         return userFlowInteraction.count {
             it.javaClass == item.javaClass
         } > count
+    }
+
+    /**
+     * This is experimental. You should not use this code on production code.
+     */
+    private fun mapInteractionObservers() {
+        this::class.members.forEach { member ->
+            member.annotations.forEach { annotation ->
+                if(annotation is OnInteraction){
+
+                    member.isAccessible = true
+
+                    mappedUserInteractions[annotation.target] = {
+                        if(member.parameters.size <= 1){
+                            member.callSuspend(this)
+                        }
+                        else{
+                            member.callSuspend(this, it)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onCleared() {
