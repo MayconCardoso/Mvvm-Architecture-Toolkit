@@ -12,7 +12,7 @@ implementation 'com.mctech.architecture.mvvm:x-core:1.4.4'
 implementation 'com.mctech.architecture.mvvm:x-core-ktx:1.4.4'
 
 // [OPTIONAL] Android Views extentios. 
-implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.4.2'
+implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.4.4'
 
 // [OPTIONAL] DataBinding library. If you wanna use the 'States' DataBinding adapters.
 // [REQUIRES] 'com.mctech.architecture.mvvm:x-view-ktx:x.x.x' library
