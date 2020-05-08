@@ -25,63 +25,60 @@ internal class ImageViewModelTest : BaseViewModelTest(){
     }
 
     @Test
-    fun `should initialize list component`() {
-        viewModel.imageListComponent.testLiveData(
-            assertion = {
-                it.assertFlow(ComponentState.Initializing)
-                verifyZeroInteractions(loadImageListCase)
-                verifyZeroInteractions(loadImageDetailsCase)
-            }
-        )
+    fun `should initialize components`() = testLiveDataScenario{
+
+        assertLiveDataFlow(viewModel.imageListComponent){
+            it.assertFlow(ComponentState.Initializing)
+        }
+
+        assertLiveDataFlow(viewModel.imageDetailsComponent){
+            it.assertEmpty()
+        }
+
     }
 
     @Test
-    fun `should initialize details component`() {
-        viewModel.imageDetailsComponent.assertIsEmpty()
+    fun `should show data on list component`() = testLiveDataScenario{
+        whenThisScenario {
+            whenever(loadImageListCase.execute()).thenReturn(
+                InteractionResult.Success(expectedList)
+            )
+        }
+
+        onThisAction {
+            viewModel.interact(ImageInteraction.LoadImages)
+        }
+
+        assertLiveDataFlow(viewModel.imageListComponent){
+            it.assertFlow(
+                ComponentState.Initializing,
+                ComponentState.Loading.FromEmpty,
+                ComponentState.Success(expectedList)
+            )
+            verify(loadImageListCase, times(1)).execute()
+        }
     }
 
     @Test
-    fun `should show data on list component`() {
-        viewModel.imageListComponent.testLiveData(
-            scenario = {
-                whenever(loadImageListCase.execute()).thenReturn(
-                    InteractionResult.Success(expectedList)
-                )
-            },
-            action = {
-                viewModel.interact(ImageInteraction.LoadImages)
-            },
-            assertion = {
-                it.assertFlow(
-                    ComponentState.Initializing,
-                    ComponentState.Loading.FromEmpty,
-                    ComponentState.Success(expectedList)
-                )
-                verify(loadImageListCase, times(1)).execute()
-            }
-        )
-    }
+    fun `should show error on list component`() = testLiveDataScenario{
+        whenThisScenario {
+            whenever(loadImageListCase.execute()).thenReturn(
+                InteractionResult.Error(ImageException.CannotFetchImages)
+            )
+        }
 
-    @Test
-    fun `should show error on list component`() {
-        viewModel.imageListComponent.testLiveData(
-            scenario = {
-                whenever(loadImageListCase.execute()).thenReturn(
-                    InteractionResult.Error(ImageException.CannotFetchImages)
-                )
-            },
-            action = {
-                viewModel.interact(ImageInteraction.LoadImages)
-            },
-            assertion = {
-                it.assertFlow(
-                    ComponentState.Initializing,
-                    ComponentState.Loading.FromEmpty,
-                    ComponentState.Error(ImageException.CannotFetchImages)
-                )
-                verify(loadImageListCase, times(1)).execute()
-            }
-        )
+        onThisAction {
+            viewModel.interact(ImageInteraction.LoadImages)
+        }
+
+        assertLiveDataFlow(viewModel.imageListComponent){
+            it.assertFlow(
+                ComponentState.Initializing,
+                ComponentState.Loading.FromEmpty,
+                ComponentState.Error(ImageException.CannotFetchImages)
+            )
+            verify(loadImageListCase, times(1)).execute()
+        }
     }
 }
 ```
