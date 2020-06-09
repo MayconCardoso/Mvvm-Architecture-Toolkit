@@ -28,7 +28,7 @@ testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.5.3'
 
 ## Related Library
 
-[Architecture Boilerplate Generator]() - It is a personal code generator to create new features and to avoid writing a lot of boilerplate.
+[Architecture Boilerplate Generator](https://github.com/MayconCardoso/ArchitectureBoilerplateGenerator) - It is a personal code generator to create new features and to avoid writing a lot of boilerplate.
 
 ## Documentation
 * [Core Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core)
