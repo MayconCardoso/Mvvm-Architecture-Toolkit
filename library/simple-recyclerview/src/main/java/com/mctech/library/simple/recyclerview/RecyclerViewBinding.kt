@@ -1,11 +1,12 @@
-package com.mctech.library.view.ktx
+package com.mctech.library.simple.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import androidx.viewbinding.ViewBinding
-import com.mctech.library.view.ktx.base.SimpleBindingAdapter
-import com.mctech.library.view.ktx.base.SimpleBindingHolder
+import com.mctech.library.simple.recyclerview.base.SimpleBindingAdapter
+import com.mctech.library.simple.recyclerview.base.SimpleBindingHolder
+import com.mctech.library.simple.recyclerview.utils.SimpleItemDiffCallback
 
 /**
  * Encapsulate the creation of recycler views in order to reduce all the necessary boilerplate.

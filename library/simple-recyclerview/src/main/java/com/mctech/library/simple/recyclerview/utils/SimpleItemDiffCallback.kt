@@ -1,4 +1,4 @@
-package com.mctech.library.view.ktx
+package com.mctech.library.simple.recyclerview.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import java.util.Objects

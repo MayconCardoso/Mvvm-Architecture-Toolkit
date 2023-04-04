@@ -24,11 +24,11 @@ dependencies {
     // [REQUIRED] Core library. With the architecture components.
     implementation project(path: ':library:core')
     implementation project(path: ':library:core-extentions')
-    implementation project(path: ':library:view-extentions')
+    implementation project(path: ':library:simple-recyclerview')
 
     // Dagger
     implementation "com.google.dagger:dagger:2.45"
-    implementation "com.google.dagger:hilt-android:2.44"
+    implementation "com.google.dagger:hilt-android:2.45"
     kapt "com.google.dagger:hilt-compiler:2.45"
 
     // Plataform

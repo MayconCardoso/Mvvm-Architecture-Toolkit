@@ -1,4 +1,4 @@
-package com.mctech.library.view.ktx.base
+package com.mctech.library.simple.recyclerview.base
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding

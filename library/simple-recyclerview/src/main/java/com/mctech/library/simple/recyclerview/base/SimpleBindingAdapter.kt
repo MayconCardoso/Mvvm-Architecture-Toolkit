@@ -1,19 +1,19 @@
-package com.mctech.library.view.ktx.base
+package com.mctech.library.simple.recyclerview.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
-import com.mctech.library.view.ktx.SimpleItemDiffCallback
+import com.mctech.library.simple.recyclerview.utils.SimpleItemDiffCallback
 
 /**
  * Default adapter to create lists without boilerplate.
  */
-class SimpleBindingAdapter<T: Any, VDB : ViewBinding>(
+class SimpleBindingAdapter<T : Any, VDB : ViewBinding>(
   // Diff algorithm
   diffCallback: DiffUtil.ItemCallback<T> = SimpleItemDiffCallback(),
-  
+
   // Prepare view binding.
   private val viewHolderFactory: (parent: ViewGroup, inflater: LayoutInflater) -> VDB,
 

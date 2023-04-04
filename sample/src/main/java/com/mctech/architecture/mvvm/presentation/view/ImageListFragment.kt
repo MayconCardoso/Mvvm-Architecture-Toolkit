@@ -12,15 +12,12 @@ import com.mctech.architecture.mvvm.R
 import com.mctech.architecture.mvvm.databinding.FragmentListOfImagesBinding
 import com.mctech.architecture.mvvm.databinding.ItemImageBinding
 import com.mctech.architecture.mvvm.domain.entities.Image
-import com.mctech.architecture.mvvm.presentation.ImageCommands
 import com.mctech.architecture.mvvm.presentation.ImageInteraction
 import com.mctech.architecture.mvvm.presentation.ImageViewModel
 import com.mctech.architecture.mvvm.x.core.ComponentState
-import com.mctech.architecture.mvvm.x.core.ViewCommand
-import com.mctech.architecture.mvvm.x.core.ktx.bindCommand
 import com.mctech.architecture.mvvm.x.core.ktx.bindState
 import com.mctech.architecture.mvvm.x.core.ktx.viewBinding
-import com.mctech.library.view.ktx.prepareRecyclerView
+import com.mctech.library.simple.recyclerview.prepareRecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
