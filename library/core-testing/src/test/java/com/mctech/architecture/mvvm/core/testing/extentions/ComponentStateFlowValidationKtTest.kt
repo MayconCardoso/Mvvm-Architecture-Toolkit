@@ -1,7 +1,8 @@
-package com.mctech.architecture.mvvm.x.core.testing.extentions
+package com.mctech.architecture.mvvm.core.testing.extentions
 
-import com.mctech.architecture.mvvm.x.core.ComponentState
-import com.mctech.architecture.mvvm.x.core.testing.testScenario
+import com.mctech.architecture.mvvm.core.ComponentState
+import com.mctech.architecture.mvvm.core.testing.extentions.assertFlow
+import com.mctech.architecture.mvvm.core.testing.testScenario
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Test
 

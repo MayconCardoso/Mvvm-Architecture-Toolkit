@@ -3,7 +3,7 @@ package com.mctech.architecture.mvvm.domain.interactions
 import com.mctech.architecture.mvvm.domain.entities.Image
 import com.mctech.architecture.mvvm.domain.error.ImageException
 import com.mctech.architecture.mvvm.domain.service.ImageService
-import com.mctech.architecture.mvvm.x.core.testing.testScenario
+import com.mctech.architecture.mvvm.core.testing.testScenario
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions

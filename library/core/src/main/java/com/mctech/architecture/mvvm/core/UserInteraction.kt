@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core
+package com.mctech.architecture.mvvm.core
 
 import kotlin.reflect.KClass
 

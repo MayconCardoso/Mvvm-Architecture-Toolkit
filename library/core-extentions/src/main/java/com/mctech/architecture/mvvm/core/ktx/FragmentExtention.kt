@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core.ktx
+package com.mctech.architecture.mvvm.core.ktx
 
 import android.content.Context
 import android.view.View
@@ -9,8 +9,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import com.mctech.architecture.mvvm.x.core.BaseViewModel
-import com.mctech.architecture.mvvm.x.core.ViewCommand
+import com.mctech.architecture.mvvm.core.BaseViewModel
+import com.mctech.architecture.mvvm.core.ViewCommand
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn

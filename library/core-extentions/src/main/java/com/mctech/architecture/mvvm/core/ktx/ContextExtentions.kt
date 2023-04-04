@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core.ktx
+package com.mctech.architecture.mvvm.core.ktx
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

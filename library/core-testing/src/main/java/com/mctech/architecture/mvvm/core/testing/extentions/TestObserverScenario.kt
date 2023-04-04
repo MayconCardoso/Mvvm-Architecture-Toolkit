@@ -1,8 +1,8 @@
-package com.mctech.architecture.mvvm.x.core.testing.extentions
+package com.mctech.architecture.mvvm.core.testing.extentions
 
 import androidx.lifecycle.LiveData
-import com.mctech.architecture.mvvm.x.core.testing.agent.FlowObserverAgent
-import com.mctech.architecture.mvvm.x.core.testing.agent.LiveDataObserverAgent
+import com.mctech.architecture.mvvm.core.testing.agent.FlowObserverAgent
+import com.mctech.architecture.mvvm.core.testing.agent.LiveDataObserverAgent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

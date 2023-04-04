@@ -1,9 +1,9 @@
-package com.mctech.architecture.mvvm.x.core.ktx
+package com.mctech.architecture.mvvm.core.ktx
 
 import androidx.lifecycle.LifecycleOwner
-import com.mctech.architecture.mvvm.x.core.BaseViewModel
-import com.mctech.architecture.mvvm.x.core.SingleLiveEvent
-import com.mctech.architecture.mvvm.x.core.ViewCommand
+import com.mctech.architecture.mvvm.core.BaseViewModel
+import com.mctech.architecture.mvvm.core.SingleLiveEvent
+import com.mctech.architecture.mvvm.core.ViewCommand
 
 /**
  * It is called when you wanna observe a single event and then stop to observing it.

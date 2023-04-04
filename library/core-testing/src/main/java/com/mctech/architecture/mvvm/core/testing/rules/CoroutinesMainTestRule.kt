@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core.testing.rules
+package com.mctech.architecture.mvvm.core.testing.rules
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.Dispatchers

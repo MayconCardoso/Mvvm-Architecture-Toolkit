@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core
+package com.mctech.architecture.mvvm.core
 
 /**
  * A command is something that happen just once like for example:

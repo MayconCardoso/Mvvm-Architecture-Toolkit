@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core.testing.agent
+package com.mctech.architecture.mvvm.core.testing.agent
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

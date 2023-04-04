@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core.testing
+package com.mctech.architecture.mvvm.core.testing
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

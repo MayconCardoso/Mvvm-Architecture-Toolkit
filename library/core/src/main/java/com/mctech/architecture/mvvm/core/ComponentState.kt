@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core
+package com.mctech.architecture.mvvm.core
 
 /**
  * Used to manage separated component lifecycle. For example, let's say we have 3 different components on your screen.

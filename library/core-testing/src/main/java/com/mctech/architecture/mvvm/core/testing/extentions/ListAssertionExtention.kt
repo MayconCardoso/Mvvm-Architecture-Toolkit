@@ -1,4 +1,4 @@
-package com.mctech.architecture.mvvm.x.core.testing.extentions
+package com.mctech.architecture.mvvm.core.testing.extentions
 
 import org.assertj.core.api.Assertions
 
