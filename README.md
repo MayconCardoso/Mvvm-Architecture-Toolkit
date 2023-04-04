@@ -1,3 +1,6 @@
+# Important Note
+After 4 years, I have decided to continue mantaining this repo. So I started updating it and will be releasing a new version soon. For now, the library IS NOT working.
+
 # MVVM Architecture Toolkit
 This is only a personal implementation of MVVM architecture that makes your life easier by helping you to keep your screen components independently. It also has a concept of "interaction" defining exactly what the user can do on your screen turning the testing process extremely easier, once now you are able to test the "state" of your app.
 
