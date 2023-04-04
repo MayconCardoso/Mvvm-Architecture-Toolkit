@@ -8,6 +8,8 @@ ext.targets = [
 
 // Defines Library variables.
 ext.versions = [
-    'release'           : "1.6.0",
     'code'              : 120,
+    'kotlin'            : '1.8.10',
+    'release'           : "2.0.0",
+    'groupId'           : 'com.mctech.architecture.mvvm',
 ]

@@ -2,40 +2,6 @@
 apply from: "$rootDir/buildSrc/setup.gradle"
 
 buildscript {
-    ext.kotlin_version = '1.8.10'
-
-    // LIBRARY
-    ext.libraryVersion  = '1.5.3'
-    ext.previousVersion = '1.5.3'
-    ext.dependentVerionLibrary = ext.libraryVersion
-
-    ext.bintrayRepo = 'MvvmArchitectureToolkit'
-
-    ext.publishedGroupId = 'com.mctech.architecture.mvvm'
-    ext.libraryName = 'MvvmArchitectureToolkit'
-
-    ext.libraryDescription = 'This is only a personal implementation of MVVM architecture using the concept of "State Machine" to keep your screen components independently. It also has a concept of "interaction" defining exactly what the user can do on your screen turning the testing process extremely easier, because now, you are able to test the "state" of your system.'
-
-    ext.siteUrl = 'https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit'
-    ext.gitUrl = 'https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit'
-
-    ext.developerId = 'mayconcardoso'
-    ext.developerName = 'Maycon Cardoso'
-    ext.developerEmail = 'maycon.santos.cardoso@gmail.com'
-
-    ext.licenseName = 'The Apache Software License, Version 2.0'
-    ext.licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    ext.allLicenses = ["Apache-2.0"]
-
-    ext.versions = [
-            'minSdk'        : 14,
-            'compileSdk'    : 33,
-            'targetSdk'     : 33,
-
-            'release'       : libraryVersion,
-            'code'          : 120,
-    ]
-
     repositories {
         google()
         mavenCentral()

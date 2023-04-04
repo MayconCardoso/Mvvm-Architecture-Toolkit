@@ -9,6 +9,9 @@ subprojects {
                     targetSdkVersion targets.targetSdk
                     versionCode versions.code
                     versionName versions.release
+                    aarMetadata {
+                        minCompileSdk = targets.minSdk
+                    }
                 }
 
                 compileOptions {
