@@ -1,0 +1,21 @@
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+            android {
+                compileSdkVersion targets.compileSdk
+
+                defaultConfig {
+                    minSdkVersion targets.minSdk
+                    targetSdkVersion targets.targetSdk
+                    versionCode versions.code
+                    versionName versions.release
+                }
+
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_11
+                    targetCompatibility JavaVersion.VERSION_11
+                }
+            }
+        }
+    }
+}

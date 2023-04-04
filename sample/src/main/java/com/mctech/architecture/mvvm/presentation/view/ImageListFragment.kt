@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import com.mctech.architecture.mvvm.R
 import com.mctech.architecture.mvvm.databinding.FragmentListOfImagesBinding
@@ -17,95 +19,95 @@ import com.mctech.architecture.mvvm.x.core.ComponentState
 import com.mctech.architecture.mvvm.x.core.ViewCommand
 import com.mctech.architecture.mvvm.x.core.ktx.bindCommand
 import com.mctech.architecture.mvvm.x.core.ktx.bindState
-import com.mctech.library.view.ktx.attachSimpleDataBindingData
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.mctech.architecture.mvvm.x.core.ktx.viewBinding
+import com.mctech.library.view.ktx.prepareRecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 
-class ImageListFragment : Fragment() {
+@AndroidEntryPoint
+class ImageListFragment : Fragment(R.layout.fragment_list_of_images) {
 
-    private val viewModel   : ImageViewModel by sharedViewModel()
-    private var binding     : FragmentListOfImagesBinding? = null
+  // region Variables
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return FragmentListOfImagesBinding.inflate(inflater, container, false).let {
-            binding = it
-            binding?.viewModel = viewModel
-            binding?.lifecycleOwner = this
-            it.root
-        }
+  /**
+   * Holds the feature view model
+   */
+  private val viewModel by viewModels<ImageViewModel>(
+    ownerProducer = { requireActivity() }
+  )
+
+  /**
+   * Holds the feature view binding
+   */
+  private val binding by viewBinding(FragmentListOfImagesBinding::bind)
+
+  // endregion
+
+  // region Lifecycle
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    // Start view model flow
+    viewModel.initialize()
+
+    // Observes image component state.
+    bindState(viewModel.state, ::consumeComponentState)
+  }
+
+  // endregion
+
+  // region State Manipulation
+
+  private fun consumeComponentState(state: ComponentState<List<Image>>) = when (state) {
+    is ComponentState.Error -> renderErrorState()
+    is ComponentState.Loading -> renderLoadingState()
+    is ComponentState.Success -> renderSuccessState(state.result)
+  }
+
+  private fun renderLoadingState() {
+    binding.recyclerList.isVisible = false
+    binding.progressState.isVisible = true
+    binding.errorComponent.isVisible = false
+  }
+
+  private fun renderErrorState() {
+    binding.recyclerList.isVisible = false
+    binding.progressState.isVisible = false
+    binding.errorComponent.isVisible = true
+  }
+
+  private fun renderSuccessState(images: List<Image>) {
+    binding.recyclerList.isVisible = true
+    binding.progressState.isVisible = false
+    binding.errorComponent.isVisible = false
+    binding.recyclerList.prepareRecyclerView(
+      items = images,
+      bindView = this::renderImageItem,
+      viewHolderFactory = this::createViewHolder,
+      diffCallbackFactory = this::createImageDiffAlgorithm,
+    )
+  }
+
+  private fun createViewHolder(parent: ViewGroup, inflater: LayoutInflater): ItemImageBinding {
+    return ItemImageBinding.inflate(inflater, parent, false)
+  }
+
+  private fun createImageDiffAlgorithm(): DiffUtil.ItemCallback<Image> {
+    return object : DiffUtil.ItemCallback<Image>() {
+      override fun areItemsTheSame(left: Image, right: Image) = left.id == right.id
+      override fun areContentsTheSame(left: Image, right: Image): Boolean {
+        return left.title == right.title && left.date == right.date
+      }
     }
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        bindCommand(viewModel) { command ->
-            handleCommand(command)
-        }
+  private fun renderImageItem(item: Image, binding: ItemImageBinding) {
+    binding.tvTitle.text = item.title
+    binding.tvDate.text = item.date
 
-        bindState(viewModel.imageListComponent) {
-            renderImageList(it)
-        }
+    binding.root.setOnClickListener {
+      viewModel.interact(ImageInteraction.OpenDetails(item))
     }
+  }
 
-    private fun handleCommand(command: ViewCommand) {
-        when (command) {
-            is ImageCommands.OpenImageDetails -> {
-                openDetailScreen()
-            }
-        }
-    }
+  // endregion
 
-    private fun openDetailScreen() {
-        activity?.supportFragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.containerFragment, ImageDetailsFragment())
-            ?.commit()
-    }
-
-    private fun renderImageList(listState: ComponentState<List<Image>>) {
-        when (listState) {
-            is ComponentState.Initializing -> {
-                // The component has not been initialized yet.
-                // It is probably the first time opening this screen.
-                // So we are gonna fetch all images.
-                // But, if you rotate the screen. The ViewModel will keep the same.
-                // So the state of this component will also keep the same and will not init again.
-                viewModel.interact(ImageInteraction.LoadImages)
-            }
-            is ComponentState.Loading -> {
-                // If you are not using the DataBinding feature
-                // you could handle your views here when your list is loading.
-                // Check 'ViewStateBindingAdapter#showOnLoading' method.
-            }
-            is ComponentState.Error -> {
-                // If you are not using the DataBinding feature
-                // you could handle your views here when your list is loading.
-                // Check 'ViewStateBindingAdapter#showOnError' method.
-            }
-            is ComponentState.Success -> {
-                // I am using the DataBinding feature, so I do not need to 'show' the list visibility
-                // I just need to setup my recycler view here.
-                setUpVerticalList(listState.result)
-            }
-        }
-    }
-
-    private fun setUpVerticalList(images: List<Image>) {
-        binding?.recyclerList?.attachSimpleDataBindingData(
-            items = images,
-            viewBindingCreator = { parent, inflater ->
-                ItemImageBinding.inflate(inflater, parent, false)
-            },
-            prepareHolder = { item, viewBinding, _ ->
-                viewBinding.item = item
-                viewBinding.root.setOnClickListener {
-                    viewModel.interact(ImageInteraction.OpenDetails(item))
-                }
-            },
-            updateCallback = object : DiffUtil.ItemCallback<Image>() {
-                override fun areItemsTheSame(left: Image, right: Image) = left.id == right.id
-
-                override fun areContentsTheSame(left: Image, right: Image): Boolean {
-                    return left.title == right.title && left.date == right.date
-                }
-            }
-        )
-    }
 }

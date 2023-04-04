@@ -5,19 +5,20 @@ import com.mctech.architecture.mvvm.domain.entities.Image
 import com.mctech.architecture.mvvm.domain.entities.ImageDetails
 import com.mctech.architecture.mvvm.domain.error.ImageException
 import com.mctech.architecture.mvvm.domain.service.ImageService
+import javax.inject.Inject
 
-class LoadImageDetailsCase(
-    private val service: ImageService
+class LoadImageDetailsCase @Inject constructor(
+  private val service: ImageService
 ) {
-    suspend fun execute(image: Image): InteractionResult<ImageDetails> {
-        try {
-            return InteractionResult.Success(service.getImageDetails(image))
-        } catch (exception: Throwable) {
-            if (exception is ImageException) {
-                return InteractionResult.Error(exception)
-            }
+  suspend fun execute(image: Image): InteractionResult<ImageDetails> {
+    try {
+      return InteractionResult.Success(service.getImageDetails(image))
+    } catch (exception: Throwable) {
+      if (exception is ImageException) {
+        return InteractionResult.Error(exception)
+      }
 
-            return InteractionResult.Error(ImageException.UnknownImageException)
-        }
+      return InteractionResult.Error(ImageException.UnknownImageException)
     }
+  }
 }

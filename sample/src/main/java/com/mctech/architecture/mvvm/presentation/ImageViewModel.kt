@@ -1,7 +1,5 @@
 package com.mctech.architecture.mvvm.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.mctech.architecture.mvvm.domain.InteractionResult
 import com.mctech.architecture.mvvm.domain.entities.Image
 import com.mctech.architecture.mvvm.domain.entities.ImageDetails
@@ -10,61 +8,65 @@ import com.mctech.architecture.mvvm.domain.interactions.LoadImageListCase
 import com.mctech.architecture.mvvm.x.core.BaseViewModel
 import com.mctech.architecture.mvvm.x.core.ComponentState
 import com.mctech.architecture.mvvm.x.core.OnInteraction
-import com.mctech.architecture.mvvm.x.core.UserInteraction
-import com.mctech.architecture.mvvm.x.core.ktx.changeToErrorState
-import com.mctech.architecture.mvvm.x.core.ktx.changeToListLoadingState
-import com.mctech.architecture.mvvm.x.core.ktx.changeToLoadingState
-import com.mctech.architecture.mvvm.x.core.ktx.changeToSuccessState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class ImageViewModel(
-    private val loadImageListCase       : LoadImageListCase,
-    private val loadImageDetailsCase    : LoadImageDetailsCase
-) : BaseViewModel(){
+@HiltViewModel
+class ImageViewModel @Inject constructor(
+  private val loadImageListCase: LoadImageListCase,
+  private val loadImageDetailsCase: LoadImageDetailsCase
+) : BaseViewModel() {
 
-    private val _imageListComponent = MutableLiveData<ComponentState<List<Image>>>(ComponentState.Initializing)
-    val imageListComponent : LiveData<ComponentState<List<Image>>> = _imageListComponent
+  private val _state by lazy {
+    MutableStateFlow<ComponentState<List<Image>>>(ComponentState.Loading.FromEmpty)
+  }
+  val state: StateFlow<ComponentState<List<Image>>> by lazy { _state }
 
-    private val _imageDetailsComponent = MutableLiveData<ComponentState<ImageDetails>>()
-    val imageDetailsComponent : LiveData<ComponentState<ImageDetails>> = _imageDetailsComponent
+  private val _detailState by lazy {
+    MutableStateFlow<ComponentState<ImageDetails>>(ComponentState.Loading.FromEmpty)
+  }
+  val detailState: StateFlow<ComponentState<ImageDetails>> by lazy { _detailState }
 
-    @OnInteraction(ImageInteraction.OpenDetails::class)
-    private suspend fun openImageDetailsInteraction(interaction : ImageInteraction.OpenDetails) {
-        // Set the details component with 'loading' state.
-        _imageDetailsComponent.changeToLoadingState()
+  override suspend fun initializeComponents() {
+    loadImagesInteraction()
+  }
 
-        // Open the details screen.
-        sendCommand(ImageCommands.OpenImageDetails)
+  private suspend fun loadImagesInteraction() {
+    when (val listResult = loadImageListCase.execute()) {
+      // Set the list component with 'Success' state.
+      is InteractionResult.Success -> {
+        _state.value = ComponentState.Success(listResult.result)
+      }
 
-        // Load image's details.
-        when(val detailsResult = loadImageDetailsCase.execute(interaction.image)){
-            // Set the details component with 'Success' state.
-            is InteractionResult.Success -> {
-                _imageDetailsComponent.changeToSuccessState(detailsResult.result)
-            }
-
-            // Set the details component with 'Error' state.
-            is InteractionResult.Error -> {
-                _imageDetailsComponent.changeToErrorState(detailsResult.error)
-            }
-        }
+      // Set the list component with 'Error' state.
+      is InteractionResult.Error -> {
+        _state.value = ComponentState.Error(listResult.error)
+      }
     }
+  }
 
-    @OnInteraction(ImageInteraction.LoadImages::class)
-    private suspend fun loadImagesInteraction() {
-        // Set the list component with 'loading' state.
-        _imageListComponent.changeToListLoadingState()
+  @OnInteraction(ImageInteraction.OpenDetails::class)
+  private suspend fun openImageDetailsInteraction(interaction: ImageInteraction.OpenDetails) {
+    // Set the details component with 'loading' state.
+    _detailState.value = ComponentState.Loading.FromEmpty
 
-        // Load image's details.
-        when(val listResult = loadImageListCase.execute()){
-            // Set the list component with 'Success' state.
-            is InteractionResult.Success -> {
-                _imageListComponent.changeToSuccessState(listResult.result)
-            }
+    // Open the details screen.
+    sendCommand(ImageCommands.OpenImageDetails)
 
-            // Set the list component with 'Error' state.
-            is InteractionResult.Error -> {
-                _imageListComponent.changeToErrorState(listResult.error)
-            }
-        }
+    // Load image's details.
+    when (val detailsResult = loadImageDetailsCase.execute(interaction.image)) {
+      // Set the details component with 'Success' state.
+      is InteractionResult.Success -> {
+        _detailState.value = ComponentState.Success(detailsResult.result)
+      }
+
+      // Set the details component with 'Error' state.
+      is InteractionResult.Error -> {
+        _detailState.value = ComponentState.Error(detailsResult.error)
+      }
     }
+  }
+
 }

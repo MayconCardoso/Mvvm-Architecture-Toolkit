@@ -1,36 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-    }
-}
-
 dependencies {
-    implementation "com.mctech.architecture.mvvm:x-core:$dependentVerionLibrary"
+    implementation project(path: ':library:core')
 
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha01'
-    implementation 'junit:junit:4.12'
-    implementation 'androidx.test:runner:1.2.0'
-    implementation 'org.assertj:assertj-core:3.11.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.1'
-    implementation 'androidx.arch.core:core-testing:2.1.0'
-
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.assertj:assertj-core:3.11.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'junit:junit:4.13.2'
+    implementation 'androidx.test:runner:1.5.2'
+    implementation 'org.assertj:assertj-core:3.24.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+    implementation 'androidx.arch.core:core-testing:2.2.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
 }
-
-ext {
-    bintrayName = 'com.mctech.architecture.mvvm.x-core-testing'
-    artifact = 'x-core-testing'
-}
-
-apply from: 'https://raw.githubusercontent.com/LissF/JCenter/master/script.gradle'

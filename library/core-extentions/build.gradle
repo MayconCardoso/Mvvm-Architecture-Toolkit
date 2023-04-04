@@ -2,33 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-    }
-}
-
 dependencies {
-    implementation "com.mctech.architecture.mvvm:x-core:$dependentVerionLibrary"
+    implementation project(path: ':library:core')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha01'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha01'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.databinding:databinding-runtime:7.4.2'
 }
-
-ext {
-    bintrayName = 'com.mctech.architecture.mvvm.x-core-ktx'
-    artifact = 'x-core-ktx'
-}
-
-apply from: 'https://raw.githubusercontent.com/LissF/JCenter/master/script.gradle'

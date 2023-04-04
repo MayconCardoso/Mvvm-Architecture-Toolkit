@@ -4,20 +4,22 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.Test
 
-class SecureRequestHandlerTest{
+class SecureRequestHandlerTest {
 
-    @Test
-    fun `should return a known network error`() { runBlocking {
+  @Test
+  fun `should return a known network error`() {
+    runBlocking {
 
-        val result = runCatching {
-            secureRequest<Int>(suspend {
-                throw Throwable()
-            })
-        }.exceptionOrNull()
+      val result = runCatching {
+        secureRequest<Int>(suspend {
+          throw Throwable()
+        })
+      }.exceptionOrNull()
 
-        Assertions.assertThat(result)
-            .isExactlyInstanceOf(
-                NetworkError.UnknownNetworkingError::class.java
-            )
-    } }
+      Assertions.assertThat(result)
+        .isExactlyInstanceOf(
+          NetworkError.UnknownNetworkingError::class.java
+        )
+    }
+  }
 }

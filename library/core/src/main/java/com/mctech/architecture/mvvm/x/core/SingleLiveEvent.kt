@@ -1,6 +1,7 @@
 package com.mctech.architecture.mvvm.x.core
 
 import androidx.annotation.MainThread
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
@@ -13,21 +14,31 @@ class SingleLiveEvent<T> : MediatorLiveData<T>() {
     private val mPending = AtomicBoolean(false)
     private val mObservers = mutableMapOf<String, Observer<in T>>()
 
-    fun observe(key : String, owner: LifecycleOwner, observer: Observer<in T>) {
+    fun observe(key: String, owner: LifecycleOwner, observer: Observer<in T>) {
         mObservers[key] = observer
-        super.observe(owner, Observer<T> { t ->
-            synchronized(mObservers){
+
+        super.observe(owner) { t ->
+            synchronized(mObservers) {
                 if (mPending.compareAndSet(true, false)) {
                     mObservers.forEach {
                         it.value.onChanged(t)
                     }
                 }
             }
-        })
+        }
+
+        val lifecycleObserver = object : DefaultLifecycleObserver {
+            override fun onDestroy(owner: LifecycleOwner) {
+                owner.lifecycle.removeObserver(this)
+                mObservers.remove(key)
+            }
+        }
+
+        owner.lifecycle.addObserver(lifecycleObserver)
     }
 
-    fun removeObserver(key : String) {
-        synchronized(mObservers){
+    fun removeObserver(key: String) {
+        synchronized(mObservers) {
             mObservers.filter {
                 it.key == key
             }.forEach {
