@@ -3,21 +3,37 @@ subprojects {
         if (project.hasProperty('android')) {
             android {
                 compileSdkVersion targets.compileSdk
-
                 defaultConfig {
                     minSdkVersion targets.minSdk
                     targetSdkVersion targets.targetSdk
                     versionCode versions.code
                     versionName versions.release
-                    aarMetadata {
-                        minCompileSdk = targets.minSdk
+                    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+                }
+
+                buildTypes {
+                    release {
                     }
+                }
+
+                sourceSets {
+                    main.java.srcDirs += 'src/main/kotlin'
+                    test.java.srcDirs += 'src/test/kotlin'
+                    androidTest.java.srcDirs += 'src/androidTest/kotlin'
                 }
 
                 compileOptions {
                     sourceCompatibility JavaVersion.VERSION_11
                     targetCompatibility JavaVersion.VERSION_11
                 }
+
+                publishing {
+                    singleVariant("release") {
+                        withSourcesJar()
+                        withJavadocJar()
+                    }
+                }
+
             }
         }
     }

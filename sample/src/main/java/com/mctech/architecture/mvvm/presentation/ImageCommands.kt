@@ -1,6 +1,6 @@
 package com.mctech.architecture.mvvm.presentation
 
-import com.mctech.architecture.mvvm.core.ViewCommand
+import io.github.mayconcardoso.mvvm.core.ViewCommand
 
 sealed class ImageCommands : ViewCommand {
   object OpenImageDetails : ImageCommands()

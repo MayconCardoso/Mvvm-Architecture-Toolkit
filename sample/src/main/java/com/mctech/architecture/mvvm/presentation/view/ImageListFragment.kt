@@ -14,10 +14,10 @@ import com.mctech.architecture.mvvm.databinding.ItemImageBinding
 import com.mctech.architecture.mvvm.domain.entities.Image
 import com.mctech.architecture.mvvm.presentation.ImageInteraction
 import com.mctech.architecture.mvvm.presentation.ImageViewModel
-import com.mctech.architecture.mvvm.core.ComponentState
-import com.mctech.architecture.mvvm.core.ktx.bindState
-import com.mctech.architecture.mvvm.core.ktx.viewBinding
-import com.mctech.library.simple.recyclerview.prepareRecyclerView
+import io.github.mayconcardoso.mvvm.core.ComponentState
+import io.github.mayconcardoso.mvvm.core.ktx.bindState
+import io.github.mayconcardoso.mvvm.core.ktx.viewBinding
+import io.github.mayconcardoso.simple.recyclerview.prepareRecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

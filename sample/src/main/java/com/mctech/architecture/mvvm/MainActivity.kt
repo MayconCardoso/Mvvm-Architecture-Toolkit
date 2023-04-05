@@ -7,8 +7,8 @@ import com.mctech.architecture.mvvm.presentation.ImageCommands
 import com.mctech.architecture.mvvm.presentation.ImageViewModel
 import com.mctech.architecture.mvvm.presentation.view.ImageDetailsFragment
 import com.mctech.architecture.mvvm.presentation.view.ImageListFragment
-import com.mctech.architecture.mvvm.core.ViewCommand
-import com.mctech.architecture.mvvm.core.ktx.bindCommand
+import io.github.mayconcardoso.mvvm.core.ViewCommand
+import io.github.mayconcardoso.mvvm.core.ktx.bindCommand
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

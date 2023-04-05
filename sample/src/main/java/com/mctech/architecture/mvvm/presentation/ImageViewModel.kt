@@ -5,9 +5,9 @@ import com.mctech.architecture.mvvm.domain.entities.Image
 import com.mctech.architecture.mvvm.domain.entities.ImageDetails
 import com.mctech.architecture.mvvm.domain.interactions.LoadImageDetailsCase
 import com.mctech.architecture.mvvm.domain.interactions.LoadImageListCase
-import com.mctech.architecture.mvvm.core.BaseViewModel
-import com.mctech.architecture.mvvm.core.ComponentState
-import com.mctech.architecture.mvvm.core.OnInteraction
+import io.github.mayconcardoso.mvvm.core.BaseViewModel
+import io.github.mayconcardoso.mvvm.core.ComponentState
+import io.github.mayconcardoso.mvvm.core.OnInteraction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

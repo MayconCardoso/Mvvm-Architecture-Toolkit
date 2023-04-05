@@ -9,9 +9,9 @@ import com.mctech.architecture.mvvm.R
 import com.mctech.architecture.mvvm.databinding.FragmentDetailsOfImageBinding
 import com.mctech.architecture.mvvm.domain.entities.ImageDetails
 import com.mctech.architecture.mvvm.presentation.ImageViewModel
-import com.mctech.architecture.mvvm.core.ComponentState
-import com.mctech.architecture.mvvm.core.ktx.bindState
-import com.mctech.architecture.mvvm.core.ktx.viewBinding
+import io.github.mayconcardoso.mvvm.core.ComponentState
+import io.github.mayconcardoso.mvvm.core.ktx.bindState
+import io.github.mayconcardoso.mvvm.core.ktx.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

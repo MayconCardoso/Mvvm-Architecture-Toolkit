@@ -3,6 +3,7 @@ apply from: "$rootDir/buildSrc/setup.gradle"
 
 buildscript {
     repositories {
+        maven { url = uri("https://plugins.gradle.org/m2/") }
         google()
         mavenCentral()
     }
@@ -11,6 +12,8 @@ buildscript {
         classpath "com.android.tools.build:gradle:7.4.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.45"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.8.10"
+        classpath 'io.github.gradle-nexus:publish-plugin:1.3.0'
     }
 }
 
@@ -29,3 +32,8 @@ apply from: "$rootDir/buildSrc/subprojects.gradle"
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// Publish repository
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'io.github.gradle-nexus.publish-plugin'
+apply from: "$rootDir/scripts/publish-root.gradle"

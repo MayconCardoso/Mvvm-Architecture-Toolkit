@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: "dagger.hilt.android.plugin"
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion targets.compileSdk
 
     defaultConfig {
         applicationId "com.mctech.architecture.mvvm"

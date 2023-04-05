@@ -2,10 +2,10 @@ package com.mctech.architecture.mvvm.presentation
 
 
 import androidx.lifecycle.viewModelScope
-import com.mctech.architecture.mvvm.core.ComponentState
-import com.mctech.architecture.mvvm.core.testing.BaseViewModelTest
-import com.mctech.architecture.mvvm.core.testing.extentions.TestObserverScenario.Companion.observerScenario
-import com.mctech.architecture.mvvm.core.testing.extentions.assertFlow
+import io.github.mayconcardoso.mvvm.core.ComponentState
+import io.github.mayconcardoso.mvvm.core.testing.BaseViewModelTest
+import io.github.mayconcardoso.mvvm.core.testing.extentions.TestObserverScenario.Companion.observerScenario
+import io.github.mayconcardoso.mvvm.core.testing.extentions.assertFlow
 import com.mctech.architecture.mvvm.domain.InteractionResult
 import com.mctech.architecture.mvvm.domain.entities.Image
 import com.mctech.architecture.mvvm.domain.error.ImageException
