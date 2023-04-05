@@ -1,13 +1,14 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 ext {
     PUBLISH_GROUP_ID = 'io.github.mayconcardoso'
     PUBLISH_VERSION = '2.0.0'
     PUBLISH_ARTIFACT_ID = 'mvvm-core'
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
+apply from: "$rootDir/buildSrc/publish-module.gradle"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
@@ -16,7 +17,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.10"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.10"
 }
 
 

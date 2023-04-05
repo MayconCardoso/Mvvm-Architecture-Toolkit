@@ -5,14 +5,24 @@ apply plugin: "dagger.hilt.android.plugin"
 
 android {
     compileSdkVersion targets.compileSdk
-
     defaultConfig {
-        applicationId "com.mctech.architecture.mvvm"
         minSdkVersion targets.minSdk
         targetSdkVersion targets.targetSdk
         versionCode versions.code
         versionName versions.release
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+        }
+        release {
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     buildFeatures {
