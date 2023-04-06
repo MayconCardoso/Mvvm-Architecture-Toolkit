@@ -1,6 +1,6 @@
 // Defines SDK variables.
 ext.targets = [
-    minSdk                  : 27,
+    minSdk                  : 21,
     compileSdk              : 33,
     targetSdk               : 33,
     kotlinJvmTarget         : 11,
@@ -8,8 +8,5 @@ ext.targets = [
 
 // Defines Library variables.
 ext.versions = [
-    'code'              : 120,
-    'kotlin'            : '1.8.10',
-    'release'           : "2.0.0",
-    'groupId'           : 'com.mctech.architecture.mvvm',
+    'kotlin'                : '1.8.10',
 ]

@@ -2,6 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
+ext {
+    PUBLISH_ARTIFACT_ID = 'mvvm-core-ktx'
+}
+
+apply from: "$rootDir/buildSrc/publish-module.gradle"
+
 dependencies {
     implementation project(path: ':library:core')
 
