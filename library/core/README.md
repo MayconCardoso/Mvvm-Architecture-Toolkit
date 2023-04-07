@@ -25,11 +25,16 @@ On my ViewModel class, I have a LiveData of my generic ComponentState.
 ```kotlin
 class ImageViewModel() : BaseViewModel(){
 
-    private val _imageListComponent = MutableLiveData<ComponentState<List<Image>>>(ComponentState.Initializing)
-    val imageListComponent : LiveData<ComponentState<List<Image>>> = _imageListComponent
+  private val _state by lazy {
+    MutableStateFlow<ComponentState<List<Image>>>(ComponentState.Loading.FromEmpty)
+  }
+  val state: StateFlow<ComponentState<List<Image>>> by lazy { _state }
 
-    private val _imageDetailsComponent = MutableLiveData<ComponentState<ImageDetails>>()
-    val imageDetailsComponent : LiveData<ComponentState<ImageDetails>> = _imageDetailsComponent
+  private val _detailState by lazy {
+    MutableStateFlow<ComponentState<ImageDetails>>(ComponentState.Loading.FromEmpty)
+  }
+  val detailState: StateFlow<ComponentState<ImageDetails>> by lazy { _detailState }
+  
 }
 ```
 
@@ -37,27 +42,23 @@ I can change the state of my component any time inside a coroutine flow on my Vi
 ```kotlin
 class ImageViewModel() : BaseViewModel(){
     
-    ...
-    
-    private suspend fun loadImagesInteraction() {
-        // Set the list component with 'loading' state.
-        _imageListComponent.changeToListLoadingState()
+  // ... rest of your code
 
-        // Load image's details.
-        when(val listResult = loadImageListCase.execute()){
-            // Set the list component with 'Success' state.
-            is InteractionResult.Success -> {
-                _imageListComponent.changeToSuccessState(listResult.result)
-            }
+  private suspend fun loadImagesInteraction() {
+    when (val listResult = loadImageListCase.execute()) {
+      // Set the list component with 'Success' state.
+      is InteractionResult.Success -> {
+        _state.value = ComponentState.Success(listResult.result)
+      }
 
-            // Set the list component with 'Error' state.
-            is InteractionResult.Error -> {
-                _imageListComponent.changeToErrorState(listResult.error)
-            }
-        }
+      // Set the list component with 'Error' state.
+      is InteractionResult.Error -> {
+        _state.value = ComponentState.Error(listResult.error)
+      }
     }
-    
-    ...
+  }
+
+  // ... rest of your code
     
 }
 ```
@@ -65,31 +66,32 @@ class ImageViewModel() : BaseViewModel(){
 I can also send commands to my view and make it navigate to another screen, for example
 ```kotlin
 class ImageViewModel() : BaseViewModel(){
-    
-    ...
-    
-    private suspend fun openImageDetailsInteraction(image: Image) {
-        // Set the details component with 'loading' state.
-        _imageDetailsComponent.changeToLoadingState()
 
-        // Open the details screen.
-        sendCommand(ImageCommands.OpenImageDetails)
+  // ... rest of your code
 
-        // Load image's details.
-        when(val detailsResult = loadImageDetailsCase.execute(image)){
-            // Set the details component with 'Success' state.
-            is InteractionResult.Success -> {
-                _imageDetailsComponent.changeToSuccessState(detailsResult.result)
-            }
+  @OnInteraction(ImageInteraction.OpenDetails::class)
+  private suspend fun openImageDetailsInteraction(interaction: ImageInteraction.OpenDetails) {
+    // Set the details component with 'loading' state.
+    _detailState.value = ComponentState.Loading.FromEmpty
 
-            // Set the details component with 'Error' state.
-            is InteractionResult.Error -> {
-                _imageDetailsComponent.changeToErrorState(detailsResult.error)
-            }
-        }
+    // Open the details screen.
+    sendCommand(ImageCommands.OpenImageDetails)
+
+    // Load image's details.
+    when (val detailsResult = loadImageDetailsCase.execute(interaction.image)) {
+      // Set the details component with 'Success' state.
+      is InteractionResult.Success -> {
+        _detailState.value = ComponentState.Success(detailsResult.result)
+      }
+
+      // Set the details component with 'Error' state.
+      is InteractionResult.Error -> {
+        _detailState.value = ComponentState.Error(detailsResult.error)
+      }
     }
-    
-    ...
+  }
+
+  // ... rest of your code
     
 }
 ```
@@ -97,60 +99,51 @@ class ImageViewModel() : BaseViewModel(){
 On my screen, I just need to observe this live data to handle my component state
 
 ```kotlin
-class ImageListFragment : Fragment() {
-    private val viewModel   : ImageViewModel by sharedViewModel()
-    private var binding     : FragmentListOfImagesBinding? = null
+@AndroidEntryPoint
+class ImageListFragment : Fragment(R.layout.fragment_list_of_images) {
 
-    ...
+  private val viewModel by viewModels<ImageViewModel>()
+  private val binding by viewBinding(FragmentListOfImagesBinding::bind)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        bindCommand(viewModel) { command ->
-            handleCommand(command)
-        }
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    // Start view model flow
+    viewModel.initialize()
 
-        bindState(viewModel.imageListComponent) {
-            renderImageList(it)
-        }
-    }
+    // Observes image component state.
+    bindState(viewModel.state, ::consumeComponentState)
+  }
 
-    private fun handleCommand(command: ViewCommand) {
-        when (command) {
-            is ImageCommands.OpenImageDetails -> {
-                openDetailScreen()
-            }
-        }
-    }
+  private fun consumeComponentState(state: ComponentState<List<Image>>) = when (state) {
+    is ComponentState.Error -> renderErrorState()
+    is ComponentState.Loading -> renderLoadingState()
+    is ComponentState.Success -> renderSuccessState(state.result)
+  }
 
-    private fun renderImageList(listState: ComponentState<List<Image>>) {
-        when (listState) {
-            is ComponentState.Initializing -> {
-                // The component has not been initialized yet.
-                // It is probably the first time opening this screen.
-                // So we are gonna fetch all images.
-                // But, if you rotate the screen. The ViewModel will keep the same.
-                // So the state of this component will also keep the same and will not init again.
-                viewModel.interact(ImageInteraction.LoadImages)
-            }
-            is ComponentState.Loading -> {
-                // If you are not using the DataBinding feature
-                // you could handle your views here when your list is loading.
-                // Check 'ViewStateBindingAdapter#showOnLoading' method.
-            }
-            is ComponentState.Error -> {
-                // If you are not using the DataBinding feature
-                // you could handle your views here when your list is loading.
-                // Check 'ViewStateBindingAdapter#showOnError' method.
-            }
-            is ComponentState.Success -> {
-                // I am using the DataBinding feature, so I do not need to 'show' the list visibility
-                // I just need to setup my recycler view here.
-                setUpList(listState.result)
-            }
-        }
-    }
+  private fun renderLoadingState() {
+    binding.recyclerList.isVisible = false
+    binding.progressState.isVisible = true
+    binding.errorComponent.isVisible = false
+  }
 
-    ...
+  private fun renderErrorState() {
+    binding.recyclerList.isVisible = false
+    binding.progressState.isVisible = false
+    binding.errorComponent.isVisible = true
+  }
 
+  private fun renderSuccessState(images: List<Image>) {
+    binding.recyclerList.isVisible = true
+    binding.progressState.isVisible = false
+    binding.errorComponent.isVisible = false
+    binding.recyclerList.prepareRecyclerView(
+      items = images,
+      bindView = this::renderImageItem,
+      viewHolderFactory = this::createViewHolder,
+      diffCallbackFactory = this::createImageDiffAlgorithm,
+    )
+  }
+
+  // ... rest of your code
 }
 ```
 
@@ -158,16 +151,15 @@ Every interaction that the user is sending to the ViewModel is handled here
 ```kotlin
 class ImageViewModel() : BaseViewModel(){
 
-    ...
+  // ... rest of your code
 
-    override suspend fun handleUserInteraction(interaction: UserInteraction) {
-        when(interaction){
-            is ImageInteraction.LoadImages  -> loadImagesInteraction()
-            is ImageInteraction.OpenDetails -> openImageDetailsInteraction(interaction.image)
-        }
+  override suspend fun handleUserInteraction(interaction: UserInteraction) {
+    when(interaction){
+        is ImageInteraction.OpenDetails -> openImageDetailsInteraction(interaction.image)
     }
+  }
 
-    ...
+  // ... rest of your code
 
 }
 ```
@@ -175,12 +167,11 @@ class ImageViewModel() : BaseViewModel(){
 Here are my 'ViewCommand' and 'UserInteraction' classes used on this example:
 
 ```kotlin
-sealed class ImageCommands : ViewCommand{
-    object OpenImageDetails : ImageCommands()
+sealed class ImageCommands : ViewCommand {
+  object OpenImageDetails : ImageCommands()
 }
 
-sealed class ImageInteraction : UserInteraction{
-    object LoadImages : ImageInteraction()
-    data class OpenDetails(val image: Image) : ImageInteraction()
+sealed class ImageInteraction : UserInteraction {
+  data class OpenDetails(val image: Image) : ImageInteraction()
 }
 ```
