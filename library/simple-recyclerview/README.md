@@ -16,7 +16,7 @@ The usage is self explanatory, but feel free to check all available functions.
 
 ### Files created to make it work
 
-Activity/Fragment XML with your recycler view.
+Activity/Fragment XML with your recycler view. (simple_fragment.xml)
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,7 +33,7 @@ Activity/Fragment XML with your recycler view.
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-Item XML defining the list item layout.
+Item XML defining the list item layout. (item_list_row.xml)
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
