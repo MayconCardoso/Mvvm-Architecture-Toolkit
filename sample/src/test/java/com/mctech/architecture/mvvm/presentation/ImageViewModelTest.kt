@@ -23,24 +23,13 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 internal class ImageViewModelTest : BaseViewModelTest() {
-  private lateinit var viewModel: ImageViewModel
-
+  private val expectedList = mutableListOf<Image>()
   private val loadImageDetailsCase = mock<LoadImageDetailsCase>()
   private val loadImageListCase = mock<LoadImageListCase>()
-  private val expectedList = mutableListOf<Image>()
-
-  @Before
-  fun `before each test`() {
-    viewModel = ImageViewModel(
-      loadImageListCase,
-      loadImageDetailsCase
-    )
-  }
-
-  @After
-  fun `after each test`() {
-    viewModel.viewModelScope.cancel()
-  }
+  private val viewModel = ImageViewModel(
+    loadImageListCase,
+    loadImageDetailsCase
+  )
 
   @Test
   fun `should initialize components`() = observerScenario {
