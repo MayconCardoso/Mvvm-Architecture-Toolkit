@@ -42,6 +42,9 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
   // Observes image component state.
   bindState(viewModel.state, ::consumeComponentState)
+  
+  // Observe commands
+  bindCommand(viewModel, ::consumeCommand)
 }
 
 ```
