@@ -143,6 +143,15 @@ class ImageListFragment : Fragment(R.layout.fragment_list_of_images) {
     )
   }
 
+  private fun renderImageItem(item: Image, binding: ItemImageBinding) {
+    binding.tvTitle.text = item.title
+    binding.tvDate.text = item.date
+
+    binding.root.setOnClickListener {
+      viewModel.interact(ImageInteraction.OpenDetails(item))
+    }
+  }
+
   // ... rest of your code
 }
 ```
