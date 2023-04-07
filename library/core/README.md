@@ -96,7 +96,7 @@ class ImageViewModel() : BaseViewModel(){
 }
 ```
 
-On my screen, I just need to observe this live data to handle my component state
+On my screen, I just need to observe this state to handle my component state
 
 ```kotlin
 @AndroidEntryPoint
