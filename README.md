@@ -34,8 +34,8 @@ implementation "io.github.mayconcardoso:simple-recyclerview:${MVVM_ARC_VERSION}"
 * [Core Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core)
 * [Core Extensions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-extentions)
 * [Core Testing Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-testing)
-* [Core Networking Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/networking)
-* [Core Networking Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/simple-recyclerview)
+* [Networking Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/networking)
+* [Simple Recycler View Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/simple-recyclerview)
 
 ## Sample
 
