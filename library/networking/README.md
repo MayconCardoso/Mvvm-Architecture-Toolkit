@@ -18,5 +18,5 @@ class YourRemoteDataSource(
 }
 ```
 
-If anything unexpected happened, one of those [pre mapped exceptions](io.github.mayconcardoso.networking/NetworkErrorTransformer.kt) will be thrown and you can decide what to do. 
+If anything unexpected happened, one of those [pre mapped exceptions](src/main/java/io/github/mayconcardoso/networking/NetworkErrorTransformer.kt) will be thrown and you can decide what to do. 
 
