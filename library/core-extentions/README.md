@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
+## Binding View Model States with your Fragment or Activity
+
 ### Without this library
 ```kotlin
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
