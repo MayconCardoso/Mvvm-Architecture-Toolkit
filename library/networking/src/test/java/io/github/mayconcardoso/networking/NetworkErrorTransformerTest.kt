@@ -1,7 +1,5 @@
-package io.github.mayconcardoso.core.networking
+package io.github.mayconcardoso.networking
 
-import io.github.mayconcardoso.core.networking.NetworkError
-import io.github.mayconcardoso.core.networking.NetworkErrorTransformer
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.assertj.core.api.Assertions

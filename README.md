@@ -1,6 +1,3 @@
-# Important Note
-After 4 years, I have decided to continue mantaining this repo. So I started updating it and will be releasing a new version soon. For now, the library IS NOT working.
-
 # MVVM Architecture Toolkit
 This is only a personal implementation of MVVM architecture that makes your life easier by helping you to keep your screen components independently. It also has a concept of "interaction" defining exactly what the user can do on your screen turning the testing process extremely easier, once now you are able to test the "state" of your app.
 
@@ -8,24 +5,24 @@ It is extremely simple to use it and to test it. But again, it is only a persona
 
 ## Download
 ```groovy
+ext {
+    MVVM_ARC_VERSION = '2.1.0'
+}
+
 // [REQUIRED] Core library. With the architecture components.
-implementation 'com.mctech.architecture.mvvm:x-core:1.5.3'
+implementation "io.github.mayconcardoso:mvvm-core:${MVVM_ARC_VERSION}"
 
-// [OPTIONAL] Core Estension library. With the architecture components extentions.
-implementation 'com.mctech.architecture.mvvm:x-core-ktx:1.5.3'
+// [OPTIONAL] Core Extension library. With the architecture components extensions to bind states and so on.
+implementation "io.github.mayconcardoso:mvvm-core-ktx:${MVVM_ARC_VERSION}"
 
-// [OPTIONAL] Android Views extentios. 
-implementation 'com.mctech.architecture.mvvm:x-view-ktx:1.5.3'
+// [OPTIONAL] Testing library. To test your architecture easily with contextual functions to make your tests cleaner.
+testImplementation "io.github.mayconcardoso:mvvm-core-testing:${MVVM_ARC_VERSION}"
 
-// [OPTIONAL] DataBinding library. If you wanna use the 'States' DataBinding adapters.
-// [REQUIRES] 'com.mctech.architecture.mvvm:x-view-ktx:x.x.x' library
-implementation 'com.mctech.architecture.mvvm:x-core-databinding:1.5.3'
+// [OPTIONAL] Networking library. To help you create your APIs easily with mapped errors to better handle business logic and avoid crashes.
+implementation "io.github.mayconcardoso:networking:${MVVM_ARC_VERSION}"
 
-// [OPTIONAL] Networking library. To help you create your APIs easily
-implementation 'com.mctech.architecture.mvvm:x-core-networking:1.5.3'
-
-// [OPTIONAL] Testing library. To test your architecture easily
-testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.5.3'
+// [OPTIONAL] Simpler recyclerview li. To help you create your APIs easily with mapped errors to better handle business logic and avoid crashes.
+implementation "io.github.mayconcardoso:simple-recyclerview:${MVVM_ARC_VERSION}"
 
 ``` 
 
@@ -36,11 +33,12 @@ testImplementation 'com.mctech.architecture.mvvm:x-core-testing:1.5.3'
 ## Documentation
 * [Core Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core)
 * [Core Extensions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-extentions)
-* [Core DataBinding Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-databinding)
 * [Core Testing Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-testing)
-* [Core Networking Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/core-networking)
-* [View Extensions Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/view-extentions)
+* [Core Networking Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/networking)
+* [Core Networking Library](https://github.com/MayconCardoso/Mvvm-Architecture-Toolkit/tree/master/library/simple-recyclerview)
 
 ## Sample
 
-Here is a [Real Android App](https://github.com/MayconCardoso/StockTradeTracking) implementing this library to define its architecture.
+Here are a couple of real android Apps implementing this library to define their architecture.
+* [Poker Grinder](https://github.com/MayconCardoso/poker-grinder)
+* [StockTradeTracking](https://github.com/MayconCardoso/StockTradeTracking)

@@ -1,4 +1,4 @@
-package io.github.mayconcardoso.core.networking
+package io.github.mayconcardoso.networking
 
 /**
  * @author MAYCON CARDOSO

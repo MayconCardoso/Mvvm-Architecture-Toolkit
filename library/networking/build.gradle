@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 ext {
-    PUBLISH_ARTIFACT_ID = 'mvvm-core-ktx'
+    PUBLISH_ARTIFACT_ID = 'networking'
 }
 
 apply from: "$rootDir/buildSrc/publish-module.gradle"

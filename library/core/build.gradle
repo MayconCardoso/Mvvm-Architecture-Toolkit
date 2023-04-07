@@ -3,8 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 ext {
-    PUBLISH_GROUP_ID = 'io.github.mayconcardoso'
-    PUBLISH_VERSION = '2.0.0'
     PUBLISH_ARTIFACT_ID = 'mvvm-core'
 }
 
