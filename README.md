@@ -21,7 +21,7 @@ testImplementation "io.github.mayconcardoso:mvvm-core-testing:${MVVM_ARC_VERSION
 // [OPTIONAL] Networking library. To help you create your APIs easily with mapped errors to better handle business logic and avoid crashes.
 implementation "io.github.mayconcardoso:networking:${MVVM_ARC_VERSION}"
 
-// [OPTIONAL] Simpler recyclerview li. To help you create your APIs easily with mapped errors to better handle business logic and avoid crashes.
+// [OPTIONAL] Simpler recyclerview library. To make it simpler and reduce the boilerplate needed to render a list of items.
 implementation "io.github.mayconcardoso:simple-recyclerview:${MVVM_ARC_VERSION}"
 
 ``` 
